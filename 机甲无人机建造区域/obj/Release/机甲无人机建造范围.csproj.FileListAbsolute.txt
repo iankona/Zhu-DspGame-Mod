@@ -1,0 +1,6 @@
+E:\Program_Python\DSPZhuPlugins\机甲无人机建造区域\obj\Release\机甲无人机建造范围.csproj.AssemblyReference.cache
+E:\Program_Python\DSPZhuPlugins\机甲无人机建造区域\obj\Release\机甲无人机建造范围.csproj.CoreCompileInputs.cache
+E:\Program_Python\DSPZhuPlugins\机甲无人机建造区域\bin\Release\ZHU机甲无人机建造区域.dll
+E:\Program_Python\DSPZhuPlugins\机甲无人机建造区域\bin\Release\ZHU机甲无人机建造区域.pdb
+E:\Program_Python\DSPZhuPlugins\机甲无人机建造区域\obj\Release\ZHU机甲无人机建造区域.dll
+E:\Program_Python\DSPZhuPlugins\机甲无人机建造区域\obj\Release\ZHU机甲无人机建造区域.pdb

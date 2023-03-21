@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33424.131
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZhuInstantBuild", "InstantBuild\ZhuInstantBuild.csproj", "{67A82CE6-8D85-41CF-A8C6-AF8DB9D85410}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "继承物品", "继承物品\继承物品.csproj", "{4B3E8E56-183A-4473-9378-FA0A0DD503F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "取物范围", "取物范围\取物范围.csproj", "{6610D5F5-59B0-4052-B9DF-A6C3A35A9728}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "机甲无人机建造范围", "机甲无人机建造区域\机甲无人机建造范围.csproj", "{386C7E24-788B-4310-941F-0C5ADB4A6D33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "点击拖动建造范围", "点击拖动建造范围\点击拖动建造范围.csproj", "{F127169B-ADEC-45DA-BFD1-520E348BD760}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "大矿机采矿范围", "大矿机采矿范围\大矿机采矿范围.csproj", "{07791F39-444B-4FAA-9D6F-73D91AA0D036}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{67A82CE6-8D85-41CF-A8C6-AF8DB9D85410}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67A82CE6-8D85-41CF-A8C6-AF8DB9D85410}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67A82CE6-8D85-41CF-A8C6-AF8DB9D85410}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67A82CE6-8D85-41CF-A8C6-AF8DB9D85410}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B3E8E56-183A-4473-9378-FA0A0DD503F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B3E8E56-183A-4473-9378-FA0A0DD503F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B3E8E56-183A-4473-9378-FA0A0DD503F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B3E8E56-183A-4473-9378-FA0A0DD503F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6610D5F5-59B0-4052-B9DF-A6C3A35A9728}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6610D5F5-59B0-4052-B9DF-A6C3A35A9728}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6610D5F5-59B0-4052-B9DF-A6C3A35A9728}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6610D5F5-59B0-4052-B9DF-A6C3A35A9728}.Release|Any CPU.Build.0 = Release|Any CPU
+		{386C7E24-788B-4310-941F-0C5ADB4A6D33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{386C7E24-788B-4310-941F-0C5ADB4A6D33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{386C7E24-788B-4310-941F-0C5ADB4A6D33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{386C7E24-788B-4310-941F-0C5ADB4A6D33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F127169B-ADEC-45DA-BFD1-520E348BD760}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F127169B-ADEC-45DA-BFD1-520E348BD760}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F127169B-ADEC-45DA-BFD1-520E348BD760}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F127169B-ADEC-45DA-BFD1-520E348BD760}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07791F39-444B-4FAA-9D6F-73D91AA0D036}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07791F39-444B-4FAA-9D6F-73D91AA0D036}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07791F39-444B-4FAA-9D6F-73D91AA0D036}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07791F39-444B-4FAA-9D6F-73D91AA0D036}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {42840291-749A-4120-9AC6-602D1ED14A0A}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,2 @@
+E:\Program_Python\DSPZhuPlugins\大矿机采矿范围\obj\Release\大矿机采矿范围.csproj.AssemblyReference.cache
+E:\Program_Python\DSPZhuPlugins\大矿机采矿范围\obj\Release\大矿机采矿范围.csproj.CoreCompileInputs.cache

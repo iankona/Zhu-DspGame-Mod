@@ -1,0 +1,6 @@
+E:\Program_Python\DSPZhuPlugins\FastMiningMachine\bin\Debug\FastMiningMachine.dll
+E:\Program_Python\DSPZhuPlugins\FastMiningMachine\bin\Debug\FastMiningMachine.pdb
+E:\Program_Python\DSPZhuPlugins\FastMiningMachine\obj\Debug\ZhuFastMiningMachine.csproj.AssemblyReference.cache
+E:\Program_Python\DSPZhuPlugins\FastMiningMachine\obj\Debug\ZhuFastMiningMachine.csproj.CoreCompileInputs.cache
+E:\Program_Python\DSPZhuPlugins\FastMiningMachine\obj\Debug\FastMiningMachine.dll
+E:\Program_Python\DSPZhuPlugins\FastMiningMachine\obj\Debug\FastMiningMachine.pdb

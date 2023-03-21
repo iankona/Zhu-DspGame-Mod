@@ -1,0 +1,8 @@
+E:\Program_Python\DSPInstantBuild\DSPInstantBuild\bin\Release\DSPInstantBuild.dll
+E:\Program_Python\DSPInstantBuild\DSPInstantBuild\bin\Release\DSPInstantBuild.pdb
+E:\Program_Python\DSPInstantBuild\DSPInstantBuild\bin\Release\UnityEngine.CoreModule.dll
+E:\Program_Python\DSPInstantBuild\DSPInstantBuild\obj\Release\DSPInstantBuild.csproj.AssemblyReference.cache
+E:\Program_Python\DSPInstantBuild\DSPInstantBuild\obj\Release\DSPInstantBuild.csproj.CoreCompileInputs.cache
+E:\Program_Python\DSPInstantBuild\DSPInstantBuild\obj\Release\DSPInstantBuild.csproj.CopyComplete
+E:\Program_Python\DSPInstantBuild\DSPInstantBuild\obj\Release\DSPInstantBuild.dll
+E:\Program_Python\DSPInstantBuild\DSPInstantBuild\obj\Release\DSPInstantBuild.pdb

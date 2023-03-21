@@ -1,0 +1,16 @@
+E:\Program_Python\DSPZhuPlugins\DSPInstantBuild\bin\Release\DSPInstantBuild.dll
+E:\Program_Python\DSPZhuPlugins\DSPInstantBuild\bin\Release\DSPInstantBuild.pdb
+E:\Program_Python\DSPZhuPlugins\DSPInstantBuild\bin\Release\UnityEngine.CoreModule.dll
+E:\Program_Python\DSPZhuPlugins\DSPInstantBuild\obj\Release\ZhuInstantBuild.csproj.AssemblyReference.cache
+E:\Program_Python\DSPZhuPlugins\DSPInstantBuild\obj\Release\ZhuInstantBuild.csproj.CoreCompileInputs.cache
+E:\Program_Python\DSPZhuPlugins\DSPInstantBuild\obj\Release\ZhuInstantBuild.csproj.CopyComplete
+E:\Program_Python\DSPZhuPlugins\DSPInstantBuild\obj\Release\DSPInstantBuild.dll
+E:\Program_Python\DSPZhuPlugins\DSPInstantBuild\obj\Release\DSPInstantBuild.pdb
+E:\Program_Python\DSPZhuPlugins\InstantBuild\bin\Release\ZHUInstantBuild.dll
+E:\Program_Python\DSPZhuPlugins\InstantBuild\bin\Release\ZHUInstantBuild.pdb
+E:\Program_Python\DSPZhuPlugins\InstantBuild\bin\Release\UnityEngine.CoreModule.dll
+E:\Program_Python\DSPZhuPlugins\InstantBuild\obj\Release\ZhuInstantBuild.csproj.AssemblyReference.cache
+E:\Program_Python\DSPZhuPlugins\InstantBuild\obj\Release\ZhuInstantBuild.csproj.CoreCompileInputs.cache
+E:\Program_Python\DSPZhuPlugins\InstantBuild\obj\Release\ZhuInstantBuild.csproj.CopyComplete
+E:\Program_Python\DSPZhuPlugins\InstantBuild\obj\Release\ZHUInstantBuild.dll
+E:\Program_Python\DSPZhuPlugins\InstantBuild\obj\Release\ZHUInstantBuild.pdb

@@ -1,0 +1,6 @@
+E:\Program_Python\DSPZhuPlugins\AddInterstellarCargoShip\obj\Release\ZhuAddInterstellarCargoShip.csproj.AssemblyReference.cache
+E:\Program_Python\DSPZhuPlugins\AddInterstellarCargoShip\obj\Release\ZhuAddInterstellarCargoShip.csproj.CoreCompileInputs.cache
+E:\Program_Python\DSPZhuPlugins\AddInterstellarCargoShip\bin\Release\ZHUAddInterstellarCargoShip.dll
+E:\Program_Python\DSPZhuPlugins\AddInterstellarCargoShip\bin\Release\ZHUAddInterstellarCargoShip.pdb
+E:\Program_Python\DSPZhuPlugins\AddInterstellarCargoShip\obj\Release\ZHUAddInterstellarCargoShip.dll
+E:\Program_Python\DSPZhuPlugins\AddInterstellarCargoShip\obj\Release\ZHUAddInterstellarCargoShip.pdb
