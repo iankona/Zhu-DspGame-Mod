@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6610D5F5-59B0-4052-B9DF-A6C3A35A9728}</ProjectGuid>
+    <ProjectGuid>{84EB07B1-5682-41ED-95FD-893AF8327ABC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>取物范围</RootNamespace>
@@ -32,15 +32,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>D:\Program Disport\WeGameApps\rail_apps\Dyson Sphere Program(2001516)\BepInEx\core\0Harmony.dll</HintPath>
+      <HintPath>D:\Program_disport\WeGameApps\rail_apps\Dyson Sphere Program(2001516)\BepInEx\core\0Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>D:\Program Disport\WeGameApps\rail_apps\Dyson Sphere Program(2001516)\DSPGAME_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>D:\Program_disport\WeGameApps\rail_apps\Dyson Sphere Program(2001516)\DSPGAME_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="BepInEx">
-      <HintPath>D:\Program Disport\WeGameApps\rail_apps\Dyson Sphere Program(2001516)\BepInEx\core\BepInEx.dll</HintPath>
+      <HintPath>D:\Program_disport\WeGameApps\rail_apps\Dyson Sphere Program(2001516)\BepInEx\core\BepInEx.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -52,11 +52,11 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine">
-      <HintPath>D:\Program Disport\WeGameApps\rail_apps\Dyson Sphere Program(2001516)\DSPGAME_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>D:\Program_disport\WeGameApps\rail_apps\Dyson Sphere Program(2001516)\DSPGAME_Data\Managed\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>D:\Program Disport\WeGameApps\rail_apps\Dyson Sphere Program(2001516)\DSPGAME_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>D:\Program_disport\WeGameApps\rail_apps\Dyson Sphere Program(2001516)\DSPGAME_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
