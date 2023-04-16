@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0AD8CA5E-84FF-4DF3-8AAF-C96EAD0E82A3}</ProjectGuid>
+    <ProjectGuid>{893789EB-707B-4F55-9BDD-0B085948D8C7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DSPInstantBuild</RootNamespace>
-    <AssemblyName>ZHUInstantBuild</AssemblyName>
+    <RootNamespace>DSPFastMiningMachine</RootNamespace>
+    <AssemblyName>ZHUFastMiningMachine</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -32,15 +32,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>D:\Program_disport\WeGameApps\rail_apps\Dyson Sphere Program(2001516)\BepInEx\core\0Harmony.dll</HintPath>
+      <HintPath>D:\Program Disport\WeGameApps\rail_apps\Dyson Sphere Program(2001516)\BepInEx\core\0Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>D:\Program_disport\WeGameApps\rail_apps\Dyson Sphere Program(2001516)\DSPGAME_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>D:\Program Disport\WeGameApps\rail_apps\Dyson Sphere Program(2001516)\DSPGAME_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="BepInEx">
-      <HintPath>D:\Program_disport\WeGameApps\rail_apps\Dyson Sphere Program(2001516)\BepInEx\core\BepInEx.dll</HintPath>
+      <HintPath>D:\Program Disport\WeGameApps\rail_apps\Dyson Sphere Program(2001516)\BepInEx\core\BepInEx.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -52,7 +52,7 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine">
-      <HintPath>D:\Program_disport\WeGameApps\rail_apps\Dyson Sphere Program(2001516)\DSPGAME_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>D:\Program Disport\WeGameApps\rail_apps\Dyson Sphere Program(2001516)\DSPGAME_Data\Managed\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
@@ -61,7 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InstantBuild.cs" />
+    <Compile Include="FastMiningMachine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
