@@ -31,11 +31,12 @@ namespace 大矿机采矿范围
         public static void Postfix(FactorySystem __instance, int __result)
         {
             // __instance.minerPool[__result].speed = 20000; //默认为10000，对应采矿30个/矿点
-            // __instance.minerPool[__result].kFanDot = 0.73f;
-            __instance.minerPool[__result].kFanRadius += 5;
+            MinerComponent miner = __instance.minerPool[__result];
+            float kFanRadius = (float)AccessTools.Field(typeof(MinerComponent), "kFanRadius").GetValue(miner);
+            kFanRadius += 5;
 
-            __instance.minerPool[__result].kMK2FanLength += 2;
-            __instance.minerPool[__result].kMK2FanWidth  += 2;
+            //__instance.minerPool[__result].kMK2FanLength += 2;
+            //__instance.minerPool[__result].kMK2FanWidth  += 2;
         }
     }
 }

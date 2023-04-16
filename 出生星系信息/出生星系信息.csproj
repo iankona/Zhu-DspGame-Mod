@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{38C79F48-1408-49B9-AD2C-D9D7F7649451}</ProjectGuid>
+    <ProjectGuid>{BE1F3C59-C9A5-42E5-899E-584FB24E4C94}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>大矿机采矿范围</RootNamespace>
-    <AssemblyName>ZHU大矿机采矿范围</AssemblyName>
+    <RootNamespace>取物范围</RootNamespace>
+    <AssemblyName>ZHU取物范围</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -61,7 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="大矿机采矿范围.cs" />
+    <Compile Include="出生星系信息.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
