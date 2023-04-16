@@ -1,0 +1,8 @@
+E:\Program_Python\DSPZhuPlugins\DSPInstantBuild\bin\Debug\DSPInstantBuild.dll
+E:\Program_Python\DSPZhuPlugins\DSPInstantBuild\bin\Debug\DSPInstantBuild.pdb
+E:\Program_Python\DSPZhuPlugins\DSPInstantBuild\bin\Debug\UnityEngine.CoreModule.dll
+E:\Program_Python\DSPZhuPlugins\DSPInstantBuild\obj\Debug\ZhuInstantBuild.csproj.AssemblyReference.cache
+E:\Program_Python\DSPZhuPlugins\DSPInstantBuild\obj\Debug\ZhuInstantBuild.csproj.CoreCompileInputs.cache
+E:\Program_Python\DSPZhuPlugins\DSPInstantBuild\obj\Debug\ZhuInstantBuild.csproj.CopyComplete
+E:\Program_Python\DSPZhuPlugins\DSPInstantBuild\obj\Debug\DSPInstantBuild.dll
+E:\Program_Python\DSPZhuPlugins\DSPInstantBuild\obj\Debug\DSPInstantBuild.pdb
