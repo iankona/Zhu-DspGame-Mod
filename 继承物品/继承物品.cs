@@ -74,6 +74,7 @@ namespace 继承物品
                 GameMain.mainPlayer.TryAddItemToPackage(2206,200, 0, false); // 2206 蓄电器
                 GameMain.mainPlayer.TryAddItemToPackage(2209,  5, 0, false); // 2209 能量枢纽
                 GameMain.mainPlayer.TryAddItemToPackage(2210,  5, 0, false); // 2210 人造恒星
+                GameMain.mainPlayer.TryAddItemToPackage(2030,  5, 0, false); // 2030 流速器
 
 
                 GameMain.history.UnlockTech(1001); // 1001	电磁学
@@ -127,7 +128,7 @@ namespace 继承物品
                 GameMain.history.UnlockTech(4101);
                 GameMain.history.UnlockTech(4102);
                 GameMain.history.UnlockTech(4103);
-                // GameMain.history.UnlockTech(4104);
+                GameMain.history.UnlockTech(4104);
 
             }
         }
