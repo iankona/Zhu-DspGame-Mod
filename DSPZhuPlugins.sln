@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "荒漠星添加石油3", "�
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "矿机采矿留根", "矿机采矿留根\矿机采矿留根.csproj", "{D122DDF3-C19D-4B0D-9F92-82EB5366605F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "荒漠星添加石油4", "荒漠星添加石油4\荒漠星添加石油4.csproj", "{A73B59D1-5BE0-44B9-A5FD-468849115CD4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +113,10 @@ Global
 		{D122DDF3-C19D-4B0D-9F92-82EB5366605F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D122DDF3-C19D-4B0D-9F92-82EB5366605F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D122DDF3-C19D-4B0D-9F92-82EB5366605F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A73B59D1-5BE0-44B9-A5FD-468849115CD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A73B59D1-5BE0-44B9-A5FD-468849115CD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A73B59D1-5BE0-44B9-A5FD-468849115CD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A73B59D1-5BE0-44B9-A5FD-468849115CD4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

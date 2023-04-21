@@ -6,6 +6,7 @@ using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using BepInEx;
+using Compressions;
 using HarmonyLib;
 using UnityEngine;
 
@@ -43,7 +44,7 @@ namespace 荒漠星添加石油
                 planet.data.veinPool = new VeinData[1024];
                 planet.data.veinCursor = 1;
                 // 添加石油(planet);
-                添加煤炭(planet);
+                // 添加煤炭(planet);
             }
             if (planet.type == EPlanetType.Desert)
             {
@@ -117,110 +118,171 @@ namespace 荒漠星添加石油
 
         }
 
+        //static Vector3[] 取随机矿组位置列表(Vector3[] 原有矿组位置列表, PlanetData planet)
+        //{
+        //    // System.Random 随机类 = new System.Random(Guid.NewGuid().GetHashCode());
+        //    System.Random 随机类 = new System.Random(planet.seed);
+        //    int 矿组数 = 随机类.Next(7, 15);
+        //    int num1 = 8192;
+        //    Vector3[] temp1 = new Vector3[num1];
+        //    for (int index1= 0; index1 < num1; index1++)
+        //    {
+        //        int half = (int)planet.radius;
+        //        int range = (int)(2 * planet.radius);
+        //        Vector3 zero = Vector3.zero;
+
+        //        int count1 = 0;
+        //        while (count1++ < 10)
+        //        {
+        //            zero.x = (float)(随机类.Next(1, range) - half);
+        //            zero.y = (float)(随机类.Next(1, range) - half);
+        //            zero.z = (float)(随机类.Next(1, range) - half);
+        //        }
+        //        temp1[index1] = zero.normalized * planet.radius;
+        //    }
+        //    int num2 = 原有矿组位置列表.Length;
+        //    int num3 = num1 + num2;
+        //    Vector3[] temp2 = new Vector3[num3];
+        //    Array.Copy(原有矿组位置列表, 0, temp2, 0, num2);
+        //    int count2 = num2;
+        //    for (int index2 = 0; index2 < num1; index2++)
+        //    {
+        //        Vector3 vec1 = temp1[index2];
+        //        bool 距离都大于 = true;
+        //        for (int index3 = 0; index3 < count2; index3++)
+        //        {
+        //            Vector3 vec2 = temp2[index3];
+        //            double 弧长 = Vector3.Angle(vec1, vec2) / 180 * Math.PI * planet.radius;
+        //            if ( 弧长 < 40.0)
+        //                距离都大于 = false;
+        //        }
+        //        if (距离都大于)
+        //        {
+        //            temp2[count2] = temp1[index2];
+        //            count2++;
+        //        }
+
+        //        if (count2 - num2 > 矿组数)
+        //            break;
+        //    }
+
+        //    int count3 = count2 - num2;
+        //    Vector3[] result = new Vector3[count3];
+        //    Array.Copy(temp2, num2, result, 0, count3);
+        //    return result;
+        //}
+
+
         static Vector3[] 取随机矿组位置列表(Vector3[] 原有矿组位置列表, PlanetData planet)
         {
             System.Random 随机类 = new System.Random(Guid.NewGuid().GetHashCode());
-            int 矿组数 = 随机类.Next(7, 15);
-            int num1 = 1000;
-            Vector3[] temp1 = new Vector3[num1];
-            for (int index1= 0; index1 < num1; index1++)
-            {
-                Vector3 zero = Vector3.zero;
+            int 矿脉数 = 随机类.Next(7, 15);
+            Vector3[] temp1 = new Vector3[原有矿组位置列表.Length+矿脉数];
+            Array.Copy(原有矿组位置列表, 0, temp1, 0, 原有矿组位置列表.Length);
 
-                int count1 = 0;
-                while (count1++ < 10)
-                {
-                    zero.x = (float)(随机类.Next(1, (int)(2 * planet.radius)) - (int)(planet.radius));
-                    zero.y = (float)(随机类.Next(1, (int)(2 * planet.radius)) - (int)(planet.radius));
-                    zero.z = (float)(随机类.Next(1, (int)(2 * planet.radius)) - (int)(planet.radius));
-                }
-                temp1[index1] = zero.normalized * planet.radius;
-            }
-            int num2 = 原有矿组位置列表.Length;
-            int num3 = num1 + num2;
-            Vector3[] temp2 = new Vector3[num3];
-            Array.Copy(原有矿组位置列表, 0, temp2, 0, num2);
-            int count2 = num2;
-            for (int index2 = 0; index2 < num1; index2++)
+            int count1 = 原有矿组位置列表.Length;
+            for (int index1 = 0; index1 < 矿脉数; index1++)
             {
-                Vector3 vec1 = temp1[index2];
-                bool 距离都大于 = true;
-                for (int index3 = 0; index3 < count2; index3++)
+                int count2 = 0;
+                while (count2++ < 10240)
                 {
-                    Vector3 vec2 = temp2[index3];
-                    float 弧长 = Mathf.Acos(Vector3.Dot(vec1.normalized, vec2.normalized)) * planet.radius;
-                    if ( 弧长 < 75.0f)
-                        距离都大于 = false;
-                }
-                if (距离都大于)
-                {
-                    temp2[count2] = temp1[index2];
-                    count2++;
+                    Vector3 vec1 = 置星球随机位置(Vector3.zero, planet, planet.radius-10, planet.radius);
+                    if (vec1.sqrMagnitude < planet.radius * planet.radius - 0.5)
+                        continue;
+                    bool 都大于 = 布尔都大于间隔(temp1, count1, vec1, planet, 50);
+                    if (都大于)
+                    {
+                        temp1[count1] = vec1;
+                        count1++;
+                        break;
+                    }
+
                 }
 
-                if (count2 - num2 > 矿组数)
-                    break;
             }
 
-            int count3 = count2 - num2;
+            int count3 = count1 - 原有矿组位置列表.Length;
             Vector3[] result = new Vector3[count3];
-            Array.Copy(temp2, num2, result, 0, count3);
+            Array.Copy(temp1, 原有矿组位置列表.Length, result, 0, count3);
             return result;
         }
 
         static Vector3[] 取随机矿脉位置列表(Vector3 position, PlanetData planet)
         {
             System.Random 随机类 = new System.Random(Guid.NewGuid().GetHashCode());
-            int 矿脉数 = 随机类.Next(7, 21);
-            int num = 1024;
-            Vector3[] temp1 = new Vector3[num];
-            for (int index1 = 0; index1 < num; index1++)
+            int 矿脉数 = 随机类.Next(7, 27);
+            Vector3[] temp1 = new Vector3[矿脉数];
+            temp1[0] = position;
+            int count1 = 1;
+            for (int index1 = 1; index1 < 矿脉数; index1++)
             {
-                Vector3 zero = Vector3.zero;
-
-                int range = 10; // vector2_1.sqrMagnitude <= 36.0
-                int half = 5;
-                temp1[index1] = position;
-
-                int count1 = 0;
-                while (count1++ < 10)
+                int zeroindex = 随机类.Next(0, count1);
+                Vector3 zero = temp1[zeroindex];
+                int count2 = 0;
+                while (count2++ < 1024)
                 {
-                    zero.x = 随机类.Next(1, range) - half;
-                    zero.y = 随机类.Next(1, range) - half;
-                    zero.z = 随机类.Next(1, range) - half;
+                    Vector3 vec1 = 置星球随机位置(zero, planet, 1.65, 1.65-0.04);
+                    if (vec1.sqrMagnitude < planet.radius * planet.radius-0.5)
+                        continue;
+                    bool 都大于 = 布尔都大于间隔(temp1, count1, vec1, planet, 1.65);
+                    if (都大于)
+                    {
+                        temp1[count1] = vec1;
+                        count1++;
+                        break;
+                    }
+
                 }
-                temp1[index1] = (position + zero).normalized * planet.radius;
+
             }
-            Vector3[] temp2 = new Vector3[num];
-            temp2[0] = position;
-            int count2 = 1;
-            for (int index2 = 1; index2 < num; index2++)
-            {
-                Vector3 vec1 = temp1[index2];
-                bool 距离都大于 = true;
-                for (int index3 = 0; index3 < count2; index3++)
-                {
-                    Vector3 vec2 = temp2[index3];
-                    float 弧长 = Mathf.Acos(Vector3.Dot(vec1.normalized, vec2.normalized)) * planet.radius;
-                    if ( 弧长 < 1.6f)
-                        距离都大于 = false;
-                }
-                if (距离都大于)
-                {
-                    temp2[count2] = temp1[index2];
-                    count2++;
-                }
-
-                if (count2 > 矿脉数)
-                    break;
-            }
-            Vector3[] result = new Vector3[count2];
-            Array.Copy(temp2, 0, result, 0, count2);
+            Vector3[] result = new Vector3[count1];
+            Array.Copy(temp1, 0, result, 0, count1);
             return result;
+        }
+
+        static Vector3 置星球随机位置(Vector3 position, PlanetData planet, double left, double right)
+        {
+            DotNet35Random dotNet35Random1 = new DotNet35Random(planet.seed);
+            Vector3 zero = Vector3.zero;
+
+            double half = right;
+            double range = 2 * right;
+
+            int count1 = 0;
+            while (count1++ < 400)
+            {
+                dotNet35Random1.NextDouble();
+                dotNet35Random1.NextDouble();
+                dotNet35Random1.NextDouble();
+                zero.x = (float)(dotNet35Random1.NextDouble() * range - half);
+                zero.y = (float)(dotNet35Random1.NextDouble() * range - half);
+                zero.z = (float)(dotNet35Random1.NextDouble() * range - half);
+                if (left * left < zero.sqrMagnitude && zero.sqrMagnitude < half * half)
+                {
+                    return (position + zero).normalized * planet.radius;
+                }
+            }
+            return Vector3.zero;
+
         }
 
 
 
+        static bool 布尔都大于间隔(Vector3[] temp1, int currutindex1, Vector3 vec1, PlanetData planet, double limit)
+        {
+            bool 都大于 = true;
+            for (int index1 = 0; index1 < currutindex1; index1++)
+            {
+                Vector3 vec2 = temp1[index1];
+                double 弧长 = Vector3.Angle(vec1, vec2) / 180 * Math.PI * planet.radius;
+                if (弧长 < limit) // 1.65
+                    都大于 = false;
+            }
+            if (都大于)
+                return true;
+            else 
+                return false;
+        }
 
 
         static void 添加石油(PlanetData planet)
@@ -243,8 +305,8 @@ namespace 荒漠星添加石油
                 for (int index1 = 0; index1 < 随机矿组位置列表.Length; index1++)
                 {
                     Vector3 zero1 = 随机矿组位置列表[index1];
-                    Vector3 zero2 = planet.aux.RawSnap(zero1);
-                    float height2 = planet.data.QueryHeight(zero2); // 吸附到网格，单位向量
+                    Vector3 zero2 = planet.aux.RawSnap(zero1); // 吸附到网格，单位向量
+                    float height2 = planet.data.QueryHeight(zero2); 
                     if (  (double)height2 >= (double)planet.radius)
                     {
                         vein.type = EVeinType.Oil;
@@ -284,9 +346,14 @@ namespace 荒漠星添加石油
                 {
                     Vector3 zero1 = 随机矿组位置列表[index1];
                     bool 矿组有添加 = false;
+
                     Vector3[] 随机矿脉位置列表 = 取随机矿脉位置列表(zero1, planet);
+                    //if (随机矿脉位置列表.Length < 5)
+                    //    continue;
+
                     for (int index2 = 0; index2 < 随机矿脉位置列表.Length; index2++ )
                     {
+                        
                         Vector3 zero2 = 随机矿脉位置列表[index2];
                         float height2 = planet.data.QueryHeight(zero2);
                         if ((double)height2 >= (double)planet.radius)
@@ -294,8 +361,8 @@ namespace 荒漠星添加石油
                             int veintypeindex = (int)EVeinType.Coal;
                             vein.type = EVeinType.Coal;
                             vein.groupIndex = (short)groupindex;
-                            // vein.amount = 1000000000; // 表示无限储量；
-                            vein.amount = 150; // 表示无限储量；
+                            vein.amount = 1000000000; // 表示无限储量；
+                            // vein.amount = 150; // 矿脉高度与容量有关，越多越高
                             vein.modelIndex = (short)随机类.Next(PlanetModelingManager.veinModelIndexs[veintypeindex], PlanetModelingManager.veinModelIndexs[veintypeindex] + PlanetModelingManager.veinModelCounts[veintypeindex]);
                             vein.productId = PlanetModelingManager.veinProducts[veintypeindex];
                             vein.minerCount = 0;
