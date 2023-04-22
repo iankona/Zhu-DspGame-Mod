@@ -1,8 +1,0 @@
-E:\Program_Python\DSPInstantBuild\DSPInstantBuild\obj\Debug\DSPInstantBuild.csproj.AssemblyReference.cache
-E:\Program_Python\DSPInstantBuild\DSPInstantBuild\obj\Debug\DSPInstantBuild.csproj.CoreCompileInputs.cache
-E:\Program_Python\DSPInstantBuild\DSPInstantBuild\bin\Debug\DSPInstantBuild.dll
-E:\Program_Python\DSPInstantBuild\DSPInstantBuild\bin\Debug\DSPInstantBuild.pdb
-E:\Program_Python\DSPInstantBuild\DSPInstantBuild\bin\Debug\UnityEngine.CoreModule.dll
-E:\Program_Python\DSPInstantBuild\DSPInstantBuild\obj\Debug\DSPInstantBuild.csproj.CopyComplete
-E:\Program_Python\DSPInstantBuild\DSPInstantBuild\obj\Debug\DSPInstantBuild.dll
-E:\Program_Python\DSPInstantBuild\DSPInstantBuild\obj\Debug\DSPInstantBuild.pdb
