@@ -193,26 +193,31 @@ namespace 荒漠星添加石油
             return result;
         }
 
-        static Vector3[] 取星球剩余区域列表(Vector3[] 星球划分区域列表, Vector3[] 原有矿组位置列表, PlanetData planet)
+        static Vector3[] 取星球剩余区域列表(Vector3[] 星球划分区域列表, Vector3[] 原有矿脉位置列表, PlanetData planet)
         {
-            if (原有矿组位置列表.Length == 0)
+            if (原有矿脉位置列表.Length == 0)
             {
                 Vector3[] result1 = new Vector3[星球划分区域列表.Length];
                 Array.Copy(星球划分区域列表, 0, result1, 0, 星球划分区域列表.Length);
                 return result1;
             }
 
+            // double cos值0 = Vector3.Dot(星球划分区域列表[0].normalized, 星球划分区域列表[1].normalized) + 0.05;
+            double 弧长 = 50.0;
+            double 弧度 = 弧长 / planet.radius;
+            //double 角度 = 弧长 / (2 * Math.PI * planet.radius) * 360;
+            double cos值0 = Math.Cos(弧度);
             Vector3[] temp1 = new Vector3[星球划分区域列表.Length];
             int count1 = 0;
             for (int index1 = 0; index1 < 星球划分区域列表.Length; index1++)
             {
                 bool 都大于 = true;
                 Vector3 vec1 = 星球划分区域列表[index1];
-                for (int index2 = 0; index2 < 原有矿组位置列表.Length; index2++)
+                for (int index2 = 0; index2 < 原有矿脉位置列表.Length; index2++)
                 {
-                    Vector3 vec2 = 原有矿组位置列表[index2];
-                    double 弧长 = Vector3.Angle(vec1, vec2) / 180 * Math.PI * planet.radius;
-                    if (弧长 < 70)
+                    Vector3 vec2 = 原有矿脉位置列表[index2];
+                    double cos值1 = Vector3.Dot(vec2.normalized, vec1.normalized);
+                    if (cos值1 > cos值0)
                     {
                         都大于 = false;
                         break;
@@ -239,44 +244,52 @@ namespace 荒漠星添加石油
             Vector3[] 星球划分区域列表 = 取星球划分区域列表(planet);
             Vector3[] 原有矿脉位置列表 = 取原有矿脉位置列表(planet);
             Vector3[] 星球剩余区域列表 = 取星球剩余区域列表(星球划分区域列表, 原有矿脉位置列表, planet);
+            if (星球剩余区域列表.Length == 0)
+                return new Vector3[0];
 
-            Vector3[] temp1 = new Vector3[星球划分区域列表.Length];
+            Dictionary<int, Vector3> temp1 = new Dictionary<int, Vector3>();
             for (int index1 = 0; index1 < 矿组数; index1++)
             {
-                int id1 = 随机类.Next(0, 星球剩余区域列表.Length);
-                Vector3 position = 星球剩余区域列表[id1];
-                Vector3[] temp2 = new Vector3[星球划分区域列表.Length-1];
-                Array.Copy(星球剩余区域列表, 0, temp2, 0, id1);
-                int count2 = 星球剩余区域列表.Length - (id1 + 1);
-                Array.Copy(星球剩余区域列表, id1 + 1, temp2, id1, count2);
-                星球剩余区域列表 = temp2;
+                int count1 = 0;
+                while (count1++ < 100)
+                {
+                    int id1 = 随机类.Next(1, 星球剩余区域列表.Length);
+                    if (!temp1.ContainsKey(id1))
+                    {
+                        temp1.Add(id1, 星球剩余区域列表[id1]);
+                        break;
+                    }
+                }
 
-                Vector3 vec1 = 置星球随机位置(position, planet, 0.1, 4.2);
-                temp1[index1] = vec1;
             }
-            Vector3[] result = new Vector3[矿组数];
-            Array.Copy(temp1, 0, result, 0, 矿组数);
+
+            int count2 = temp1.Count;
+            Vector3[] result = new Vector3[count2];
+            int index2 = 0;
+            foreach (Vector3 vec1 in temp1.Values)
+            {
+                Vector3 vec2 = 置星球随机位置(vec1, planet, 0.5, 7.50);
+                result[index2] = vec2;
+                index2++;
+            }
             return result;
         }
 
         static Vector3[] 取随机矿脉位置列表(Vector3 position, PlanetData planet)
         {
             System.Random 随机类 = new System.Random(Guid.NewGuid().GetHashCode());
-            int 矿脉数 = 随机类.Next(11, 25);
+            int 矿脉数 = 随机类.Next(15, 27);
             Vector3[] temp1 = new Vector3[矿脉数];
             temp1[0] = position;
             int count1 = 1;
             for (int index1 = 1; index1 < 矿脉数; index1++)
             {
-                int zeroindex = 随机类.Next(0, count1);
-                Vector3 zero = temp1[zeroindex];
+                Vector3 zero = temp1[随机类.Next(1, count1)-1];
                 int count2 = 0;
                 while (count2++ < 10240)
                 {
-                    Vector3 vec1 = 置星球随机位置(zero, planet, 1.70, 1.70+0.05);
-                    if (vec1.sqrMagnitude < planet.radius * planet.radius-0.5)
-                        continue;
-                    bool 都大于 = 布尔都大于间隔(temp1, count1, vec1, planet, 1.70);
+                    Vector3 vec1 = 置星球随机位置(zero, planet, 2.00, 2.05);
+                    bool 都大于 = 布尔都大于间隔(temp1, count1, vec1, planet, 2.00);
                     if (都大于)
                     {
                         temp1[count1] = vec1;
@@ -320,12 +333,14 @@ namespace 荒漠星添加石油
 
         static bool 布尔都大于间隔(Vector3[] temp1, int currutindex1, Vector3 vec1, PlanetData planet, double limit)
         {
+            double 弧度 = limit / planet.radius;
+            double cos值0 = Math.Cos(弧度);
             bool 都大于 = true;
             for (int index1 = 0; index1 < currutindex1; index1++)
             {
                 Vector3 vec2 = temp1[index1];
-                double 弧长 = (Vector3.Angle(vec1, vec2) / 180) * Math.PI * planet.radius;
-                if (弧长 < limit) // 1.65
+                double cos值1 = Vector3.Dot(vec2.normalized, vec1.normalized);
+                if (cos值1 > cos值0)
                     都大于 = false;
             }
             if (都大于)
@@ -417,6 +432,40 @@ namespace 荒漠星添加石油
                 }
             }
         }
+        //static void 添加石油2(PlanetData planet)
+        //{
+        //    lock (planet)
+        //    {
+        //        planet.data.veinPool = new VeinData[1024];
+        //        planet.data.veinCursor = 1;
+        //        int groupindex = 1;
+
+        //        System.Random 随机类 = new System.Random(Guid.NewGuid().GetHashCode());
+
+        //        VeinData vein = new VeinData();
+        //        Vector3[] 星球划分区域列表 = 取星球划分区域列表(planet);
+        //        for (int index1 = 0; index1 < 星球划分区域列表.Length; index1++)
+        //        {
+        //            Vector3 zero1 = 星球划分区域列表[index1];
+        //            //Vector3 zero2 = planet.aux.RawSnap(zero1); // 吸附到网格，单位向量
+        //            float height2 = planet.data.QueryHeight(zero1);
+        //            if ((double)height2 >= (double)planet.radius)
+        //            {
+        //                int veintypeindex = (int)EVeinType.Oil;
+        //                vein.type = EVeinType.Oil;
+        //                vein.groupIndex = (short)groupindex;
+        //                vein.amount = 随机类.Next(150000, 350000);
+        //                vein.modelIndex = (short)随机类.Next(PlanetModelingManager.veinModelIndexs[veintypeindex], PlanetModelingManager.veinModelIndexs[veintypeindex] + PlanetModelingManager.veinModelCounts[veintypeindex]);
+        //                vein.productId = PlanetModelingManager.veinProducts[veintypeindex];
+        //                vein.minerCount = 0;
+        //                vein.pos = zero1.normalized * height2;
+        //                planet.data.EraseVegetableAtPoint(vein.pos);// 清除位置上的树木等
+        //                planet.data.AddVeinData(vein);
+        //                groupindex++;
+        //            }
+        //        }
+        //    }
+        //}
 
     }
 }
