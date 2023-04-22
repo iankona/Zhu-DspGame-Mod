@@ -1,6 +1,0 @@
-E:\Program_python\戴森球计划mod\更高功率能量枢纽\bin\Release\ZHU更高功率能量枢纽.dll
-E:\Program_python\戴森球计划mod\更高功率能量枢纽\bin\Release\ZHU更高功率能量枢纽.pdb
-E:\Program_python\戴森球计划mod\更高功率能量枢纽\obj\Release\更高功率能量枢纽.csproj.AssemblyReference.cache
-E:\Program_python\戴森球计划mod\更高功率能量枢纽\obj\Release\更高功率能量枢纽.csproj.CoreCompileInputs.cache
-E:\Program_python\戴森球计划mod\更高功率能量枢纽\obj\Release\ZHU更高功率能量枢纽.dll
-E:\Program_python\戴森球计划mod\更高功率能量枢纽\obj\Release\ZHU更高功率能量枢纽.pdb
