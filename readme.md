@@ -97,9 +97,9 @@
 
 
 
-- Zhu物品堆叠倍数.dll
+- Zhu背包物品堆叠倍数.dll
 
-​		物品堆叠倍数为10倍。影响物流系统和机甲背包。
+​		背包的物品堆叠倍数为10倍。不影响储物箱等物流系统。
 
 
 
@@ -108,10 +108,20 @@
   ​	小采矿机覆盖到矿簇里的任何一个矿脉，会自动将整个矿簇里的所有矿脉纳入采集范围。
 
   ​	代码编制期间，遇到代码正常，数据是public的，通过控制台打印也确认数据也确实修改了，但就是不起作用，后面推测可能是多线程的进程被守护了，导致我这边修改后，又被其他线程改回去了。后面想了很多办法，最终通过统一矿机的矿脉列表长度方式解决的。原来是有多少矿脉，就生成对应的矿脉列表。现在把采矿机的矿脉列表都统一到32个矿脉，一般的矿脉也就28个以内，32长度的矿脉列表也够用了。
+  
+  
+
+### 三、下载地址
 
 
 
-### 三、参考
+链接：[https://pan.baidu.com/s/1NDybDSOPT7huJbjNGgU4Mg?pwd=h9uy](http://jump2.bdimg.com/safecheck/index?url=rN3wPs8te/pjz8pBqGzzzz3wi8AXlR5g1NgdDpM6gxJfkP6kyorB1Rg+wNm8kIilYL2mR7Y5XB4XvCSmjns1G+zz4xxl+TDriyZg4x6YnepGlz+36AkIIp2tR38RKSFufNUvbL+ed2n+cik8S+eWO3a+JcsYTQHKjNeaAi215GfNP7pvU1Pt1/eTs9xxhJy2hqSLu/+J0Xa4SjHN9tW1KA==)
+
+提取码：h9uy
+
+
+
+### 四、参考
 
 ​	项目代码主要参考了[Windows10CE](https://github.com/Windows10CE/DSPPlugins)’s  [DSPPlugins](https://github.com/Windows10CE/DSPPlugins)项目、[mattsemar](https://github.com/mattsemar)’s  [dsp-long-arm](https://github.com/mattsemar/dsp-long-arm)项目、[hetima](https://github.com/hetima)'s  [DSP_FastTravelEnabler](https://github.com/hetima/DSP_FastTravelEnabler)项目、[hetima](https://github.com/hetima)'s [DSP_ExpandTouchableRange](https://github.com/hetima/DSP_ExpandTouchableRange)项目，和[是小庄庄鸭](https://space.bilibili.com/26024327)’s  戴森球计划Mod制作教学教程（[[戴森球计划Mod制作教学]1.手把手安装需要用到的软件](https://www.bilibili.com/video/BV1pK4y1n7FF)，[[戴森球计划Mod制作教学]2.新建项目及HelloWrold](https://www.bilibili.com/video/BV1UA411T7Jv)，[[戴森球计划Mod制作教学]1.评论区答疑](https://www.bilibili.com/video/BV1dy4y1a747)，[[戴森球计划Mod制作教学]3.代码分析及Mod制作思路](https://www.bilibili.com/video/BV1Gt4y1z7JS)，[[戴森球计划Mod制作教学]采矿机倍率修改(采矿更快)](https://www.bilibili.com/video/BV1At4y1z7vp)）
 

@@ -29,7 +29,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zhu超级能量枢纽", "�
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zhu物流配送机起送量", "物流配送机起送量\Zhu物流配送机起送量.csproj", "{07AE3F37-9502-4A77-A1A4-CB889746504F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zhu物品堆叠倍数", "物品堆叠倍数\Zhu物品堆叠倍数.csproj", "{07C26689-1185-4CD6-B3EE-CD289232C5AE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zhu背包物品堆叠倍数", "背包物品堆叠倍数\Zhu背包物品堆叠倍数.csproj", "{07C26689-1185-4CD6-B3EE-CD289232C5AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
