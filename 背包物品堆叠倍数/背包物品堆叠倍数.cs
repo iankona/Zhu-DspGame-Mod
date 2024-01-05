@@ -9,7 +9,7 @@ using HarmonyLib;
 using UnityEngine;
 
 
-namespace 物品堆叠倍数
+namespace 背包物品堆叠倍数
 {
     [BepInPlugin(GUID, NAME, VERSION)]
     [BepInProcess(GAME_PROCESS)]
@@ -21,67 +21,146 @@ namespace 物品堆叠倍数
         private const string GAME_PROCESS = "DSPGAME.exe";
 
 
-        public void Awake()
+        public void Start()
         {
             new Harmony(GUID).PatchAll(typeof(背包物品堆叠倍数));
+            // new Harmony(GUID).PatchAll(typeof(AddItem1专项修改));
+            new Harmony(GUID).PatchAll(typeof(AddItem2专项修改));
         }
     }
 
     class 背包物品堆叠倍数
     {
-        [HarmonyPrefix]
-        [HarmonyPatch(typeof(Player), "TryAddItemToPackage")]
-        static bool 函数(Player __instance, 
-                        ref int itemId,
-                        ref int count,
-                        ref int inc,
-                        ref bool throwTrash,
-                        ref int objId,
-                        ref bool trashLife)
+        public static int[] olditemStackCount;
+        public static int[] newitemStackCount;
+
+
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(StorageComponent), "LoadStatic")]
+        static void 函数0()
         {
-            if (itemId <= 0 || itemId == 1099)
-                return true;
+            olditemStackCount = StorageComponent.itemStackCount;
+
+            newitemStackCount = new int[12000];
+            for (int index1 = 0; index1 < 12000; ++index1)
+                newitemStackCount[index1] = 1000;
 
             int multiplier = 10;
-            StorageComponent package = __instance.package;
 
-            bool 存在物品 = false;
-            for (int index1 = 0; index1 < package.size; ++index1)
+            ItemProto[] dataArray = LDB.items.dataArray;
+            for (int index2 = 0; index2 < dataArray.Length; ++index2)
             {
-                if (package.grids[index1].itemId == itemId)
-                    存在物品 = true;        
+                newitemStackCount[dataArray[index2].ID] = multiplier * dataArray[index2].StackSize;
             }
-            if (存在物品)
-                return true;
 
-            for (int index2 = 0; index2 < package.size; ++index2)
-            {
-                if (package.grids[index2].itemId == 0)
-                {
-                    package.grids[index2].itemId = itemId;
-                    package.grids[index2].count = 0;
-                    package.grids[index2].filter = 0;
-                    package.grids[index2].stackSize = multiplier * StorageComponent.itemStackCount[itemId];
-                    break;
-                }
-            }
+        }
+
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(StorageComponent), "AddItemStacked")]
+        static bool 函数1(StorageComponent __instance)
+        {
+            if (__instance == GameMain.data.mainPlayer.package)
+                StorageComponent.itemStackCount = newitemStackCount;
             return true;
+        }
+
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(StorageComponent), "AddItemStacked")]
+        static void 函数2(StorageComponent __instance)
+        {
+            if (__instance == GameMain.data.mainPlayer.package)
+                StorageComponent.itemStackCount = olditemStackCount;
+        }
+
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(StorageComponent), "Sort")]
+        static bool 函数3(StorageComponent __instance)
+        {
+            if (__instance == GameMain.data.mainPlayer.package)
+                StorageComponent.itemStackCount = newitemStackCount;
+            return true;
+        }
+
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(StorageComponent), "Sort")]
+        static void 函数4(StorageComponent __instance)
+        {
+            if (__instance == GameMain.data.mainPlayer.package)
+                StorageComponent.itemStackCount = olditemStackCount;
         }
     }
 
-    //class 物流和背包物品堆叠倍数
+
+    // 物流系统用，不是背包用
+    //[HarmonyPatch]
+    //class AddItem1专项修改
     //{
-    //    [HarmonyPostfix]
-    //    [HarmonyPatch(typeof(StorageComponent), "LoadStatic")]
-    //    static void 函数(StorageComponent __instance)
+    //    public static MethodInfo TargetMethod()
     //    {
-    //        int multiplier = 10;
-    //        ItemProto[] dataArray = LDB.items.dataArray;
-    //        for (int index = 0; index < dataArray.Length; ++index)
+    //        var methods = typeof(StorageComponent).GetMethods();
+    //        MethodInfo method_to_patch = methods[0];
+    //        foreach (var method in methods) 
     //        {
-    //            StorageComponent.itemStackCount[dataArray[index].ID] = multiplier * dataArray[index].StackSize;
+    //            // Console.WriteLine(method);
+    //            if (method.Name == "AddItem")
+    //            {
+    //                method_to_patch = method;
+    //                break;
+    //            }
+                    
     //        }
+    //        return method_to_patch;
     //    }
+    //    public static bool Prefix(StorageComponent __instance)
+    //    {
+    //        if (__instance == GameMain.data.mainPlayer.package)
+    //            StorageComponent.itemStackCount = 背包物品堆叠倍数.newitemStackCount;
+    //        Console.WriteLine("Prefix... ...");
+    //        return true;
+    //    }
+    //    public static void Postfix(StorageComponent __instance)
+    //    {
+    //        if (__instance == GameMain.data.mainPlayer.package)
+    //            StorageComponent.itemStackCount = 背包物品堆叠倍数.olditemStackCount;
+    //    }
+        
     //}
 
+
+    // 背包用
+    [HarmonyPatch]
+    class AddItem2专项修改
+    {
+        public static MethodInfo TargetMethod()
+        {
+            var methods = typeof(StorageComponent).GetMethods();
+            MethodInfo method_to_patch = methods[0];
+            foreach (var method in methods)
+            {
+                // Console.WriteLine(method);
+                if (method.Name == "AddItem")
+                    method_to_patch = method;
+            }
+            return method_to_patch;
+        }
+        public static bool Prefix(StorageComponent __instance)
+        {
+            if (__instance == GameMain.data.mainPlayer.package)
+                StorageComponent.itemStackCount = 背包物品堆叠倍数.newitemStackCount;
+            // Console.WriteLine("Prefix... ...");
+            return true;
+        }
+        public static void Postfix(StorageComponent __instance)
+        {
+            if (__instance == GameMain.data.mainPlayer.package)
+                StorageComponent.itemStackCount = 背包物品堆叠倍数.olditemStackCount;
+        }
+
+    }
+
 }
+
+// 参考 [C#][HarmonyPatch]Manual patch internal class/anonymous method/d
+// 参考 https://www.bilibili.com/read/cv22698875/
+// 参考 https://github.com/pardeike/Harmony/issues/393 ， Neutron3529 commented on May 1, 2021
+// 参考 https://github.com/pardeike/Harmony/issues/393#issuecomment-830340953
