@@ -15,9 +15,9 @@ namespace 矿机采矿留根
     [BepInProcess(GAME_PROCESS)]
     public class Plugin : BaseUnityPlugin
     {
-        public const string GUID = "cn.zhufile.dsp.minerleavevein";
+        public const string GUID = "cn.zhufile.dsp.miner_leave_vein";
         public const string NAME = "矿机采矿留根";
-        public const string VERSION = "1.0.0";
+        public const string VERSION = "1.0.7";
         private const string GAME_PROCESS = "DSPGAME.exe";
 
 
@@ -33,7 +33,7 @@ namespace 矿机采矿留根
     {
         [HarmonyPrefix]
         [HarmonyPatch(typeof(MinerComponent), "InternalUpdate")]
-        static bool Prefix(ref MinerComponent __instance, VeinData[] veinPool)
+        static bool Prefix(MinerComponent __instance, VeinData[] veinPool)
         {
             // VeinData[] veinPool = GameMain.mainPlayer.factory.veinPool;
             lock (veinPool) 
@@ -42,7 +42,7 @@ namespace 矿机采矿留根
                 for (int index1 = 0; index1 < __instance.veinCount; index1++)
                 {
                     VeinData vein = veinPool[__instance.veins[index1]];
-                    if (vein.amount > 100)
+                    if (vein.amount > 101)
                     {
                         都小于 = false;
                         __instance.currentVeinIndex = index1;
@@ -50,7 +50,7 @@ namespace 矿机采矿留根
  
                 }
 
-                if (都小于 & GameMain.history.techStates[3606].curLevel < 137)
+                if (都小于 & GameMain.history.techStates[3606].curLevel < 157)
                     return false; // 禁用原函数
                 else
                     return true; // 原函数正常运行

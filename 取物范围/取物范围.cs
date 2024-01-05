@@ -15,9 +15,9 @@ namespace 取物范围
     [BepInProcess(GAME_PROCESS)]
     public class Plugin : BaseUnityPlugin
     {
-        public const string GUID = "cn.zhufile.dsp.selectdistance";
+        public const string GUID = "cn.zhufile.dsp.select_distance";
         public const string NAME = "取物范围";
-        public const string VERSION = "1.0.0";
+        public const string VERSION = "1.0.7";
         private const string GAME_PROCESS = "DSPGAME.exe";
 
 
