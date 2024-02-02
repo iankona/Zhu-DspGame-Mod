@@ -1,12 +1,12 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BepInEx;
 using HarmonyLib;
-
-
+using Steamworks;
 
 namespace 继承物品
 {
@@ -32,110 +32,189 @@ namespace 继承物品
     { 
         public static void Postfix(UITechNode __instance)
         {
-            // int itemID = 5002; // 5002 星际物流运输船
-            // int count = 50;
+            添加物品(__instance);
+            //打印科技(__instance);
+            //打印物品(__instance);
+            //打印配方(__instance);
+
+        }
+
+        public static void 添加物品(UITechNode __instance)
+        {
+
+
             if (__instance.techProto.ID == 1001) // 1001 电磁学
             {
-
-                // 2301~2306	机舱容量
-                GameMain.history.UnlockTech(2301);
-                GameMain.history.UnlockTech(2302);
-                GameMain.history.UnlockTech(2303);
-
-                // GameMain.mainPlayer.TryAddItemToPackage(itemID, count, 0, false);
-                GameMain.mainPlayer.TryAddItemToPackage(2201, 50, 0, false); // 2201 电力感应塔
-                GameMain.mainPlayer.TryAddItemToPackage(2202,  5, 0, false); // 2202 无线输电塔
-
-                // GameMain.mainPlayer.TryAddItemToPackage(2001,300, 0, false); // 2001 传送带
-                // GameMain.mainPlayer.TryAddItemToPackage(2011,200, 0, false); // 2011 分拣器
-                GameMain.mainPlayer.TryAddItemToPackage(2003, 1500, 0, false); // 2003 极速传送带
-                GameMain.mainPlayer.TryAddItemToPackage(2013,  600, 0, false); // 2013 极速分拣器
-
-                GameMain.mainPlayer.TryAddItemToPackage(2101, 25, 0, false); // 2101 小型储物仓
-                GameMain.mainPlayer.TryAddItemToPackage(2020, 25, 0, false); // 2020 四向分流器
-                GameMain.mainPlayer.TryAddItemToPackage(2107, 25, 0, false); // 2107 物流配送器
-                GameMain.mainPlayer.TryAddItemToPackage(5003,250, 0, false); // 5003 配送运输机
-
-                GameMain.mainPlayer.TryAddItemToPackage(2301, 10, 0, false); // 2301 采矿机
-                GameMain.mainPlayer.TryAddItemToPackage(2302,100, 0, false); // 2302 电弧熔炉
-                GameMain.mainPlayer.TryAddItemToPackage(2304, 50, 0, false); // 2304 制造台Mk.II
-
-                GameMain.mainPlayer.TryAddItemToPackage(2103,  20, 0, false); // 2103 行星内物流运输站
-                GameMain.mainPlayer.TryAddItemToPackage(5001, 600, 0, false); // 5001 物流运输机
-
-                GameMain.mainPlayer.TryAddItemToPackage(2104,  5, 0, false); // 2104 星际物流运输站
-                GameMain.mainPlayer.TryAddItemToPackage(2105, 80, 0, false); // 2105 轨道采集器
-                GameMain.mainPlayer.TryAddItemToPackage(5002, 50, 0, false); // 5002 星际物流运输船
-
-                GameMain.mainPlayer.TryAddItemToPackage(2203, 35, 0, false); // 2203 风力涡轮机
-                GameMain.mainPlayer.TryAddItemToPackage(2316, 25, 0, false); // 2316 大型采矿机
-
-                GameMain.mainPlayer.TryAddItemToPackage(1803,700, 0, false); // 1803 反物质燃料棒 // 机甲用
-                GameMain.mainPlayer.TryAddItemToPackage(2206,200, 0, false); // 2206 蓄电器
-                GameMain.mainPlayer.TryAddItemToPackage(2209,  5, 0, false); // 2209 能量枢纽
-                GameMain.mainPlayer.TryAddItemToPackage(2210,  5, 0, false); // 2210 人造恒星
-                GameMain.mainPlayer.TryAddItemToPackage(2030,  5, 0, false); // 2030 流速器
-
+                GameMain.mainPlayer.TryAddItemToPackage(2301,   3, 0, false); // 2301  采矿机
+                GameMain.mainPlayer.TryAddItemToPackage(2203,   3, 0, false); // 2203  风力涡轮机
+                GameMain.mainPlayer.TryAddItemToPackage(2001, 100, 0, false); // 2001  传送带
+                GameMain.mainPlayer.TryAddItemToPackage(2302,   3, 0, false); // 2302  电弧熔炉
+                GameMain.mainPlayer.TryAddItemToPackage(2303,   5, 0, false); // 2303  制造台 Mk.I
+                GameMain.mainPlayer.TryAddItemToPackage(2101,  40, 0, false); // 2101  小型储物仓
+                GameMain.mainPlayer.TryAddItemToPackage(2107,  20, 0, false); // 2107  物流配送器
+                GameMain.mainPlayer.TryAddItemToPackage(5003, 200, 0, false); // 5003  配送运输机
 
                 GameMain.history.UnlockTech(1001); // 1001	电磁学
-                GameMain.history.UnlockTech(1002); // 1002  电磁矩阵
 
                 GameMain.history.UnlockTech(1601); // 1601	基础物流系统
                 GameMain.history.UnlockTech(1401); // 1401	自动化冶金
-                GameMain.history.UnlockTech(1402); // 1402	冶炼提纯
+                GameMain.history.UnlockTech(1002); // 1002  电磁矩阵
+                GameMain.history.UnlockTech(1201); // 1201	基础制造
 
-                GameMain.history.UnlockTech(1201); // 1201	基础制造工艺制造台Ⅰ
-                GameMain.history.UnlockTech(1202); // 1202	高级制造工艺制造台Ⅱ
-
-                GameMain.history.UnlockTech(1501); // 1501	太阳能收集
-
-                GameMain.history.UnlockTech(1102); // 1102	等离子萃取精炼 // 氢
-                GameMain.history.UnlockTech(1121); // 1121  基础化工 // 硫酸
-                GameMain.history.UnlockTech(1131); // 1131  应用型超导体 // 可燃冰
-
-
-                // 2101~2106	机甲核心
-                GameMain.history.UnlockTech(2101);
-                GameMain.history.UnlockTech(2102);
-                // GameMain.history.UnlockTech(2103); // 能量回路前置
-
-                // 2201~2208	机械骨骼
-                GameMain.history.UnlockTech(2201);
-
-
-                // 2401~2407	通讯控制
-                GameMain.history.UnlockTech(2401);
-                GameMain.history.UnlockTech(2402);
-
-                // 2501~2506	能量回路
-                GameMain.history.UnlockTech(2501);
-                GameMain.history.UnlockTech(2502);
-                // GameMain.history.UnlockTech(2503); // 第3级，烧石墨，机甲滞空+小飞机建造，能量条不会见底
-
-                // 2701~2705	批量建造，蓝图
-                GameMain.history.UnlockTech(2701);
-                GameMain.history.UnlockTech(2702);
-
-
-                // 2601~2606	无人机引擎
-                GameMain.history.UnlockTech(2601); // 没必要升，到第5级，小飞机飞行速度，才能稍微追上机甲滞空飞行速度
-
-                // 2901~2904	驱动引擎
-                GameMain.history.UnlockTech(2901);
-                GameMain.history.UnlockTech(2902);
-
-                // 4101~4104	宇宙探索
-                GameMain.history.UnlockTech(4101);
-                GameMain.history.UnlockTech(4102);
-                GameMain.history.UnlockTech(4103);
-                GameMain.history.UnlockTech(4104);
-
+                GameMain.history.UnlockTech(4101); // 4101~4104 宇宙探索
+                GameMain.history.UnlockTech(2101); // 2101~2106	机甲核心
+                GameMain.history.UnlockTech(2201); // 2201~2208	机械骨骼
+                GameMain.history.UnlockTech(2301); // 2301~2307	机舱容量
+                GameMain.history.UnlockTech(2701); // 2701~2705	批量建造，蓝
+                GameMain.history.UnlockTech(2501); // 2501~2506	能量回路
+                GameMain.history.UnlockTech(2901); // 2901~2904	驱动引擎
             }
         }
+
+
+
+        public static void 打印科技(UITechNode __instance) 
+        {
+            StreamWriter file = new StreamWriter("techs.py", false, Encoding.UTF8);
+
+            file.WriteLine("LDB_techs_name = {");
+            foreach (TechProto techProto in LDB.techs.dataArray)
+            {
+                string linestr = "    " +  "'" + techProto.name + "'" + ": " + (object)techProto.ID + ",";
+                file.WriteLine(linestr);
+            }
+            file.WriteLine("}");
+
+            file.WriteLine("LDB_techs_id = {");
+            foreach (TechProto techProto in LDB.techs.dataArray)
+            {
+                string linestr = "    " + (object)techProto.ID + ":" + "'" + techProto.name + "'" + ",";
+                file.WriteLine(linestr);
+            }
+            file.WriteLine("}");
+
+            foreach (TechProto techProto in LDB.techs.dataArray)
+                file.WriteLine((object)techProto.ID + " " + techProto.name);
+
+            file.Close();
+        }
+
+
+        public static void 打印物品(UITechNode __instance)
+        {
+            StreamWriter file = new StreamWriter("items.py", false, Encoding.UTF8);
+
+            file.WriteLine("LDB_items_name = {");
+            foreach (ItemProto itemProto in LDB.items.dataArray)
+            {
+                string linestr = "    " + "'" + itemProto.name + "'" + ": " + (object)itemProto.ID + ",";
+                file.WriteLine(linestr);
+            }
+            file.WriteLine("}");
+
+            file.WriteLine("LDB_items_id = {");
+            foreach (ItemProto itemProto in LDB.items.dataArray)
+            {
+                string linestr = "    " + (object)itemProto.ID + ":" + "'" + itemProto.name + "'" + ",";
+                file.WriteLine(linestr);
+            }
+            file.WriteLine("}");
+
+            foreach (ItemProto itemProto in LDB.items.dataArray)
+                file.WriteLine((object)itemProto.ID + " " + itemProto.name);
+
+            file.Close();
+        }
+
+        public static void 打印配方(UITechNode __instance)
+        {
+            StreamWriter file = new StreamWriter("recipes.py", false, Encoding.UTF8);
+            ItemProto[] dataArray1 = LDB.items.dataArray;
+            RecipeProto[] dataArray2 = LDB.recipes.dataArray;
+
+
+            file.WriteLine("LDB_recipes_name = {");
+            for (int index2 = 0; index2 < dataArray2.Length; ++index2)
+            {
+                RecipeProto recipeProto = dataArray2[index2];
+                string idstr = (object)recipeProto.ID + ", ";
+                string namestr = "'" + recipeProto.name + "', ";
+                string spendstr = (object)((float)recipeProto.TimeSpend / 60.0f) + ", ";
+
+                string itemstr = "[";
+                foreach (int itemID in recipeProto.Items)
+                {
+                    ItemProto item1 = LDB.items.Select(itemID);
+                    itemstr += "'" + item1.name + "', ";
+                }
+                itemstr += "], ";
+
+                string itemcountstr = "[";
+                foreach (int itemcount in recipeProto.ItemCounts) itemcountstr += (object)itemcount + ", ";
+                itemcountstr += "], ";
+
+                string resultstr = "[";
+                foreach (int resultID in recipeProto.Results)
+                {
+                    ItemProto item2 = LDB.items.Select(resultID);
+                    resultstr += "'" + item2.name + "', ";
+                }
+                resultstr += "], ";
+
+                string resultcountstr = "[";
+                foreach (int resultcount in recipeProto.ResultCounts) resultcountstr += (object)resultcount + ", ";
+                resultcountstr += "], ";
+
+                string linestr = "    '" + recipeProto.name + "': [" + idstr + namestr + spendstr + itemstr + itemcountstr + resultstr + resultcountstr + "],";
+                file.WriteLine(linestr);
+            }
+            file.WriteLine("}");
+
+
+            file.WriteLine("LDB_recipes_id = {");
+            for (int index2 = 0; index2 < dataArray2.Length; ++index2)
+            {
+                RecipeProto recipeProto = dataArray2[index2];
+                string idstr = (object)recipeProto.ID + ", ";
+                string namestr = "'" + recipeProto.name + "', ";
+                string spendstr = (object)((float)recipeProto.TimeSpend / 60.0f) + ", ";
+
+                string itemstr = "[";
+                foreach (int itemID in recipeProto.Items) itemstr += (object)itemID + ", ";
+                itemstr += "], ";
+
+                string itemcountstr = "[";
+                foreach (int itemcount in recipeProto.ItemCounts) itemcountstr += (object)itemcount + ", ";
+                itemcountstr += "], ";
+
+                string resultstr = "[";
+                foreach (int resultID in recipeProto.Results) resultstr += (object)resultID + ", ";
+                resultstr += "], ";
+
+                string resultcountstr = "[";
+                foreach (int resultcount in recipeProto.ResultCounts) resultcountstr += (object)resultcount + ", ";
+                resultcountstr += "], ";
+
+                string linestr = "    '" + recipeProto.name +  "': [" + idstr + namestr + spendstr+ itemstr + itemcountstr + resultstr  + resultcountstr + "],";
+                file.WriteLine(linestr);
+            }
+            file.WriteLine("}");
+
+
+
+
+            file.Close();
+        }
+            
+
+
+
+
+
+
     }
 
 }
-
 
 //1001  铁矿
 //1002  铜矿
@@ -229,6 +308,8 @@ namespace 继承物品
 //1609  导弹组
 //1610  超音速导弹组
 //1611  引力导弹组
+//1612  干扰胶囊
+//1613  压制胶囊
 //5101  原型机
 //5102  精准无人机
 //5103  攻击无人机
@@ -246,6 +327,7 @@ namespace 继承物品
 //2011  分拣器
 //2012  高速分拣器
 //2013  极速分拣器
+//2014  集装分拣器
 //2020  四向分流器
 //2040  自动集装机
 //2030  流速监测器
@@ -299,6 +381,7 @@ namespace 继承物品
 //3007  信号塔
 //3008  行星护盾发生器
 //3009  战场分析基站
+//3010  近程电浆塔
 //6001  电磁矩阵
 //6002  能量矩阵
 //6003  结构矩阵
@@ -308,160 +391,342 @@ namespace 继承物品
 //1099  沙土
 
 
-//1  铁块
-//2  磁铁
-//3  铜块
-//4  石材
-//5  齿轮
-//6  磁线圈
-//7  风力涡轮机
-//8  电力感应塔
-//9  电磁矩阵
-//10  矩阵研究站
-//11  棱镜
-//12  电浆激发器
-//13  无线输电塔
-//14  原油萃取站
-//15  原油精炼厂
-//16  等离子精炼
-//17  高能石墨
-//18  能量矩阵
-//19  液氢燃料棒
-//20   - 推进器
-//21  加力推进器
-//22  化工厂
-//23  塑料
-//24  硫酸
-//25  有机晶体
-//26  钛晶石
-//27  结构矩阵
-//28  卡西米尔晶体
-//29  卡西米尔晶体（高效）
-//30  钛化玻璃
-//31  石墨烯
-//32  石墨烯（高效）
-//33  碳纳米管
-//34  硅石
-//35  碳纳米管（高效）
-//36  粒子宽带
-//37  晶格硅
-//38  位面过滤器
-//39  微型粒子对撞机
-//40  重氢
-//41  氘核燃料棒
-//42  湮灭约束球
-//43  人造恒星
-//44  反物质燃料棒
-//45  制造台 Mk.I
-//46  制造台 Mk.II
-//47  制造台 Mk.III
-//48  采矿机
-//49  抽水站
-//50  电路板
-//51  处理器
-//52  量子芯片
-//53  微晶元件
-//54  有机晶体（原始）
-//55  信息矩阵
-//56  电弧熔炉
-//57  玻璃
-//58  X射线裂解
-//59  高纯硅块
-//60  金刚石
-//61  金刚石（高效）
-//62  晶格硅（高效）
-//63  钢材
-//64  火力发电厂
-//65  钛块
-//66  钛合金
-//67  太阳能板
-//68  光子合并器
-//69  光子合并器（高效）
-//70  太阳帆
-//71  电磁轨道弹射器
-//72  射线接收站
-//73  卫星配电站
-//74  质能储存
-//75  宇宙矩阵
-//76  蓄电器
-//77  能量枢纽
-//78  空间翘曲器
-//79  空间翘曲器（高级）
-//80  框架材料
-//81  戴森球组件
-//82  垂直发射井
-//83  小型运载火箭
-//84  传送带
-//85  分拣器
-//86  小型储物仓
-//87  四向分流器
-//88  高速分拣器
-//89  高速传送带
-//90  极速分拣器
-//91  大型储物仓
-//92  极速传送带
-//93  行星内物流运输站
-//94  物流运输机
-//95  星际物流运输站
-//96  星际物流运输船
-//97  电动机
-//98  电磁涡轮
-//99  粒子容器
-//100  粒子容器（高效）
-//101  引力透镜
-//102  引力矩阵
-//103  超级磁场环
-//104  奇异物质
-//106  增产剂 Mk.I
-//107  增产剂 Mk.II
-//108  增产剂 Mk.III
-//109  喷涂机
-//110  分馏塔
-//111  轨道采集器
-//112  地基
-//113  微型聚变发电站
-//114  储液罐
-//115  重氢分馏
-//116  位面熔炉
-//117  流速监测器
-//118  地热发电站
-//119  大型采矿机
-//120  自动集装机
-//121  重整精炼
-//122  物流配送器
-//123  配送运输机
-//124  量子化工厂
-//125  高斯机枪塔
-//126  高频激光塔
-//127  聚爆加农炮
-//128  磁化电浆炮
-//129  导弹防御塔
-//130  干扰塔
-//131  信号塔
-//132  行星护盾发生器
-//133  燃烧单元
-//134  爆破单元
-//135  晶石爆破单元
-//136  机枪弹箱
-//137  钛化弹箱
-//138  超合金弹箱
-//139  炮弹组
-//140  高爆炮弹组
-//141  晶石炮弹组
-//142  等离子胶囊
-//143  反物质胶囊
-//144  导弹组
-//145  超音速导弹组
-//146  引力导弹组
-//147  原型机
-//148  精准无人机
-//149  攻击无人机
-//150  护卫舰
-//151  驱逐舰
-//105  动力引擎
-//152  战场分析基站
-//153  自演化研究站
-//154  重组式制造台
-//155  负熵熔炉
-//156  奇异湮灭燃料棒
+//1 戴森球计划
+//1001 电磁学
+//1002 电磁矩阵
+//1101 高效电浆控制
+//1102 等离子萃取精炼
+//1103 X射线裂解
+//1104 重整精炼
+//1111 能量矩阵
+//1112 氢燃料棒
+//1113 推进器
+//1114 加力推进器
+//1120 流体储存封装
+//1121 基础化工
+//1122 高分子化工
+//1123 高强度晶体
+//1124 结构矩阵
+//1125 卡西米尔晶体
+//1126 高强度玻璃
+//1131 应用型超导体
+//1132 高强度材料
+//1133 粒子可控
+//1134 重氢分馏
+//1141 波函数干扰
+//1142 微型粒子对撞机
+//1143 奇异物质
+//1144 人造恒星
+//1145 可控湮灭反应
+//1151 增产剂 Mk.I
+//1152 增产剂 Mk.II
+//1153 增产剂 Mk.III
+//1201 基础制造
+//1202 高速制造
+//1203 量子打印
+//1302 处理器
+//1303 量子芯片
+//1304 光子聚束采矿
+//1305 亚微观量子纠缠
+//1311 半导体材料
+//1312 信息矩阵
+//1401 自动化冶金
+//1402 冶炼提纯
+//1403 晶体冶炼
+//1411 钢材冶炼
+//1412 火力发电
+//1413 钛矿冶炼
+//1414 高强度钛合金
+//1415 移山填海工程
+//1416 微型核聚变发电
+//1417 位面冶金
+//1501 太阳能收集
+//1502 光子变频
+//1503 太阳帆轨道系统
+//1504 射线接收站
+//1505 行星电离层利用
+//1506 狄拉克逆变机制
+//1507 宇宙矩阵
+//1508 任务完成 !
+//1511 能量储存
+//1512 星际电力运输
+//1513 地热开采
+//1521 高强度轻质结构
+//1522 垂直发射井
+//1523 戴森球应力系统
+//1601 基础物流系统
+//1602 改良物流系统
+//1603 高效物流系统
+//1604 行星物流系统
+//1605 星际物流系统
+//1606 气态行星开采
+//1607 集装物流系统
+//1608 配送物流系统
+//1701 电磁驱动
+//1702 磁悬浮
+//1703 粒子磁力阱
+//1704 引力波折射
+//1705 引力矩阵
+//1711 超级磁场发生器
+//1712 卫星配电系统
+//1801 武器系统
+//1802 燃烧单元
+//1803 爆破单元
+//1804 晶石爆破单元
+//1805 动力引擎
+//1806 导弹防御塔
+//1807 聚爆加农炮
+//1808 信号塔
+//1809 行星防御系统
+//1810 干扰塔
+//1811 磁化电浆炮
+//1812 钛化弹箱
+//1813 超合金弹箱
+//1814 高爆炮弹组
+//1815 超音速导弹组
+//1816 晶石炮弹组
+//1817 引力导弹组
+//1818 反物质胶囊
+//1819 原型机
+//1820 精准无人机
+//1821 攻击无人机
+//1822 护卫舰
+//1823 驱逐舰
+//1824 压制胶囊
+//1826 战场分析基站
+//1901 数字模拟计算
+//1902 物质重组
+//1903 负熵递归
+//1904 高密度可控湮灭
 
+//2101 机甲核心
+//2102 机甲核心
+//2103 机甲核心
+//2104 机甲核心
+//2105 机甲核心
+//2106 机甲核心
+
+//2201 机械骨骼
+//2202 机械骨骼
+//2203 机械骨骼
+//2204 机械骨骼
+//2205 机械骨骼
+//2206 机械骨骼
+//2207 机械骨骼
+//2208 机械骨骼
+
+//2301 机舱容量
+//2302 机舱容量
+//2303 机舱容量
+//2304 机舱容量
+//2305 机舱容量
+//2306 机舱容量
+//2307 机舱容量
+
+//2401 通讯控制
+//2402 通讯控制
+//2403 通讯控制
+//2404 通讯控制
+//2405 通讯控制
+//2406 通讯控制
+//2407 通讯控制
+
+//2501 能量回路
+//2502 能量回路
+//2503 能量回路
+//2504 能量回路
+//2505 能量回路
+//2506 能量回路
+
+//2601 无人机引擎
+//2602 无人机引擎
+//2603 无人机引擎
+//2604 无人机引擎
+//2605 无人机引擎
+//2606 无人机引擎
+
+//2701 批量建造
+//2702 批量建造
+//2703 批量建造
+//2704 批量建造
+//2705 批量建造
+
+//2801 能量护盾
+//2802 能量护盾
+//2803 能量护盾
+//2804 能量护盾
+//2805 能量护盾
+//2806 能量护盾
+//2807 能量护盾
+
+//2901 驱动引擎
+//2902 驱动引擎
+//2903 驱动引擎
+//2904 驱动引擎
+//2905 驱动引擎
+//2906 驱动引擎
+
+//2951 自动标记重建
+//2952 自动标记重建
+//2953 自动标记重建
+//2954 自动标记重建
+//2955 自动标记重建
+//2956 自动标记重建
+
+//3101 太阳帆寿命
+//3102 太阳帆寿命
+//3103 太阳帆寿命
+//3104 太阳帆寿命
+//3105 太阳帆寿命
+//3106 太阳帆寿命
+
+//3201 射线传输效率
+//3202 射线传输效率
+//3203 射线传输效率
+//3204 射线传输效率
+//3205 射线传输效率
+//3206 射线传输效率
+//3207 射线传输效率
+//3208 射线传输效率
+
+//3301 分拣器货物叠加
+//3302 分拣器货物叠加
+//3303 分拣器货物叠加
+//3304 分拣器货物叠加
+//3305 分拣器货物叠加
+//3306 分拣器货物集装
+
+//3311 集装分拣器改良
+//3312 集装分拣器改良
+//3313 集装分拣器改良
+//3314 集装分拣器改良
+//3315 集装分拣器改良
+//3316 集装分拣器改良
+
+//4001 配送范围
+//4002 配送范围
+//4003 配送范围
+//4004 配送范围
+//4005 配送范围
+
+//3401 运输船引擎
+//3402 运输船引擎
+//3403 运输船引擎
+//3404 运输船引擎
+//3405 运输船引擎
+//3406 运输船引擎
+//3407 运输船引擎
+
+//3501 运输机舱扩容
+//3502 运输机舱扩容
+//3503 运输机舱扩容
+//3504 运输机舱扩容
+//3505 运输机舱扩容
+//3506 运输机舱扩容
+//3507 运输机舱扩容
+//3508 运输机舱扩容
+//3509 运输机舱扩容
+//3510 运输机舱扩容
+
+//3801 运输站集装物流
+//3802 运输站集装物流
+//3803 运输站集装物流
+
+//3601 矿物利用
+//3602 矿物利用
+//3603 矿物利用
+//3604 矿物利用
+//3605 矿物利用
+//3606 矿物利用
+
+//3701 垂直建造
+//3702 垂直建造
+//3703 垂直建造
+//3704 垂直建造
+//3705 垂直建造
+//3706 垂直建造
+
+//3901 研究速度
+//3902 研究速度
+//3903 研究速度
+//3904 研究速度
+
+//4101 宇宙探索
+//4102 宇宙探索
+//4103 宇宙探索
+//4104 宇宙探索
+
+//5001 动能武器伤害
+//5002 动能武器伤害
+//5003 动能武器伤害
+//5004 动能武器伤害
+//5005 动能武器伤害
+//5006 动能武器伤害
+
+//5101 能量武器伤害
+//5102 能量武器伤害
+//5103 能量武器伤害
+//5104 能量武器伤害
+//5105 能量武器伤害
+//5106 能量武器伤害
+
+//5201 爆破武器伤害
+//5202 爆破武器伤害
+//5203 爆破武器伤害
+//5204 爆破武器伤害
+//5205 爆破武器伤害
+//5206 爆破武器伤害
+
+//5301 战斗无人机伤害
+//5302 战斗无人机伤害
+//5303 战斗无人机伤害
+//5304 战斗无人机伤害
+//5305 战斗无人机伤害
+
+//5401 战斗无人机射速
+//5402 战斗无人机射速
+//5403 战斗无人机射速
+//5404 战斗无人机射速
+//5405 战斗无人机射速
+
+//5601 战斗无人机耐久
+//5602 战斗无人机耐久
+//5603 战斗无人机耐久
+//5604 战斗无人机耐久
+//5605 战斗无人机耐久
+
+//5701 行星护盾
+//5702 行星护盾
+//5703 行星护盾
+//5704 行星护盾
+//5705 行星护盾
+
+//5801 地面编队扩容
+//5802 地面编队扩容
+//5803 地面编队扩容
+//5804 地面编队扩容
+//5805 地面编队扩容
+//5806 地面编队扩容
+//5807 地面编队扩容
+
+//5901 太空编队扩容
+//5902 太空编队扩容
+//5903 太空编队扩容
+//5904 太空编队扩容
+//5905 太空编队扩容
+//5906 太空编队扩容
+//5907 太空编队扩容
+
+//6001 结构强化
+//6002 结构强化
+//6003 结构强化
+//6004 结构强化
+//6005 结构强化
+//6006 结构强化
+
+//6101 电磁武器效果
+//6102 电磁武器效果
+//6103 电磁武器效果
+//6104 电磁武器效果
+//6105 电磁武器效果
+//6106 电磁武器效果

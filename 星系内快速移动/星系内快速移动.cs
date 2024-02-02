@@ -2,14 +2,14 @@
 using BepInEx;
 using HarmonyLib;
 
-namespace 正常模式启用沙盒模式快速移动功能
+namespace 星系内快速移动
 {
     [BepInPlugin(GUID, NAME, VERSION)]
     [BepInProcess(GAME_PROCESS)]
     public class Plugin : BaseUnityPlugin
     {
         public const string GUID = "cn.zhufile.dsp.default_fast_move";
-        public const string NAME = "正常模式启用沙盒模式快速移动功能";
+        public const string NAME = "星系内快速移动";
         public const string VERSION = "1.0.7";
         private const string GAME_PROCESS = "DSPGAME.exe";
 
@@ -18,7 +18,7 @@ namespace 正常模式启用沙盒模式快速移动功能
         public void Start()
         {
             new Harmony(GUID).PatchAll(typeof(拦截机甲位置判定));
-            // new Harmony(GUID).PatchAll(typeof(全球视图启用沙盒工具));
+            new Harmony(GUID).PatchAll(typeof(全球视图启用沙盒工具));
             new Harmony(GUID).PatchAll(typeof(星系视图启用沙盒工具));
         }
     }
@@ -36,27 +36,27 @@ namespace 正常模式启用沙盒模式快速移动功能
     }
 
 
-    //class 全球视图启用沙盒工具
-    //{
-    //    public static bool sandboxToolsEnabled;
+    class 全球视图启用沙盒工具
+    {
+        public static bool sandboxToolsEnabled;
 
-    //    [HarmonyPrefix]
-    //    [HarmonyPatch(typeof(UIGlobemap), "_OnUpdate")]
-    //    public static bool 函数01(UIGlobemap __instance)
-    //    {
-    //        sandboxToolsEnabled = (bool)Traverse.Create(GameMain.instance).Field("_sandboxToolsEnabled").GetValue();
-    //        if (!sandboxToolsEnabled)
-    //            Traverse.Create(GameMain.instance).Field("_sandboxToolsEnabled").SetValue(true);
-    //        return true;
-    //    }
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(UIGlobemap), "_OnUpdate")]
+        public static bool 函数01(UIGlobemap __instance)
+        {
+            sandboxToolsEnabled = (bool)Traverse.Create(GameMain.instance).Field("_sandboxToolsEnabled").GetValue();
+            if (!sandboxToolsEnabled)
+                Traverse.Create(GameMain.instance).Field("_sandboxToolsEnabled").SetValue(true);
+            return true;
+        }
 
-    //    [HarmonyPostfix]
-    //    [HarmonyPatch(typeof(UIGlobemap), "_OnUpdate")]
-    //    public static void 函数02(UIGlobemap __instance)
-    //    {
-    //        Traverse.Create(GameMain.instance).Field("_sandboxToolsEnabled").SetValue(sandboxToolsEnabled);
-    //    }
-    //}
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(UIGlobemap), "_OnUpdate")]
+        public static void 函数02(UIGlobemap __instance)
+        {
+            Traverse.Create(GameMain.instance).Field("_sandboxToolsEnabled").SetValue(sandboxToolsEnabled);
+        }
+    }
 
 
     class 星系视图启用沙盒工具

@@ -89,8 +89,9 @@ namespace 荒漠星添加石油
         {
 
             bool 是初始星系 = 所在星系是初始星系(planet);
-            bool 缺荒漠星球 = 所在星系没有荒漠星(planet);
-            if (是初始星系 && 缺荒漠星球 && planet.type == EPlanetType.Ice) 
+            //bool 缺荒漠星球 = 所在星系没有荒漠星(planet);
+            //if (是初始星系 && 缺荒漠星球 && planet.type == EPlanetType.Ice) 
+            if (是初始星系 && planet.type == EPlanetType.Ice)
             {
                 Console.WriteLine("冻土星添加石油");
                 添加石油(planet);
