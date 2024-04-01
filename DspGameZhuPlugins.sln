@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zhu物流配送机起送量
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zhu背包物品堆叠倍数", "背包物品堆叠倍数\Zhu背包物品堆叠倍数.csproj", "{07C26689-1185-4CD6-B3EE-CD289232C5AE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zhu星系数量", "星系数量\Zhu星系数量.csproj", "{4687AEC5-FBFE-4710-BD19-153BF56BFC52}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Release|x64CPU = Release|x64CPU
@@ -64,6 +66,8 @@ Global
 		{07AE3F37-9502-4A77-A1A4-CB889746504F}.Release|x64CPU.Build.0 = Release|x64CPU
 		{07C26689-1185-4CD6-B3EE-CD289232C5AE}.Release|x64CPU.ActiveCfg = Release|x64CPU
 		{07C26689-1185-4CD6-B3EE-CD289232C5AE}.Release|x64CPU.Build.0 = Release|x64CPU
+		{4687AEC5-FBFE-4710-BD19-153BF56BFC52}.Release|x64CPU.ActiveCfg = Release|x64CPU
+		{4687AEC5-FBFE-4710-BD19-153BF56BFC52}.Release|x64CPU.Build.0 = Release|x64CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
