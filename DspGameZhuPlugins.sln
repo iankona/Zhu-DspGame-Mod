@@ -9,7 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zhu星系内快速移动", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zhu荒漠星添加石油", "荒漠星添加石油\Zhu荒漠星添加石油.csproj", "{89BFFD1E-DE5E-4AF5-B0B1-A2A8FA2C5798}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zhu海洋星黑雾不登录", "海洋星黑雾不登录\Zhu海洋星黑雾不登录.csproj", "{DEB5BAF0-FA68-4940-8696-BADF557B2580}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zhu黑雾不登录海洋星", "黑雾不登录海洋星\Zhu黑雾不登录海洋星.csproj", "{DEB5BAF0-FA68-4940-8696-BADF557B2580}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zhu黑雾不登录初始星系", "黑雾不登录初始星系\Zhu黑雾不登录初始星系.csproj", "{B59E22CD-BC1E-47EF-96B3-CE51CF9A8605}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zhu清除黑雾不涂地基", "清除黑雾不涂地基\Zhu清除黑雾不涂地基.csproj", "{9BD5BE09-8E59-4FAC-8F73-CE6E4D13F040}"
 EndProject
@@ -46,6 +48,8 @@ Global
 		{89BFFD1E-DE5E-4AF5-B0B1-A2A8FA2C5798}.Release|x64CPU.Build.0 = Release|x64CPU
 		{DEB5BAF0-FA68-4940-8696-BADF557B2580}.Release|x64CPU.ActiveCfg = Release|x64CPU
 		{DEB5BAF0-FA68-4940-8696-BADF557B2580}.Release|x64CPU.Build.0 = Release|x64CPU
+		{B59E22CD-BC1E-47EF-96B3-CE51CF9A8605}.Release|x64CPU.ActiveCfg = Release|x64CPU
+		{B59E22CD-BC1E-47EF-96B3-CE51CF9A8605}.Release|x64CPU.Build.0 = Release|x64CPU
 		{9BD5BE09-8E59-4FAC-8F73-CE6E4D13F040}.Release|x64CPU.ActiveCfg = Release|x64CPU
 		{9BD5BE09-8E59-4FAC-8F73-CE6E4D13F040}.Release|x64CPU.Build.0 = Release|x64CPU
 		{D6BE02D0-E9E6-4553-A1B9-1420B64EE8E5}.Release|x64CPU.ActiveCfg = Release|x64CPU
