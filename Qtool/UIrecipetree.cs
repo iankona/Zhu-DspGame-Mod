@@ -48,9 +48,11 @@ namespace Qtool
 
 
                 // GUI.Box(Plugin.实例.布局.newrectFrameIconXY(node.depth, node.column), node.itemProto.iconSprite.texture);
+                showRecipeBox(node);
                 showRecipeOuports(node, row, col);
                 showRecipeInfo(node, row, col);
                 showRecipeImports(node, row, col);
+
 
             }
         }
@@ -117,7 +119,7 @@ namespace Qtool
 
             }
             GUI.Label(Plugin.实例.布局.newrectFrameRecipeName(row + 2, col + 0), node.recipeProto.name);
-            GUI.Label(Plugin.实例.布局.newrectFrameRecipeText(row + 2, col + 0), "设备数量：" + node.配方数量.ToString());
+            GUI.Label(Plugin.实例.布局.newrectFrameRecipeText(row + 2, col + 0), node.配方数量.ToString());
 
         }
 
@@ -140,6 +142,43 @@ namespace Qtool
                 GUI.Label(Plugin.实例.布局.newrectFrameRecipeText(row + 4, itemIndex), itemMinCount + " /min");
             }
         }
+
+
+
+        void showRecipeBox(NodeIteration node)
+        {
+            if (node.children.Count <=0 )
+            { return; }
+            Rect startRect = Plugin.实例.布局.newrectFrameRecipeIcon(node.depth*8, node.column);
+
+            int itemindex = 0;
+
+            int itemindex1 = node.resultMinCounts.Count - 1 + node.column;
+            int index2 = node.children.Count - 1;
+            int itemindex2 = node.itemColumns[index2];
+
+            if (itemindex1 > itemindex2)
+            {
+                itemindex = itemindex1;
+            }
+            else 
+            {
+                itemindex = itemindex2;
+            }
+            
+
+
+            Rect finalRect = Plugin.实例.布局.newrectFrameRecipeIcon(node.depth*8+4, itemindex);
+            float width = finalRect.x - startRect.x + finalRect.width;
+            float height = finalRect.y - startRect.y + finalRect.height;
+            GUI.Box(new Rect(startRect.x, startRect.y,width, height), "");
+
+        }
+
+
+
+
+
     }
 }
 

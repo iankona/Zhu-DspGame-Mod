@@ -11,9 +11,9 @@ namespace Qtool
     public class 鼠标更新
     {
         bool 鼠标位于标题栏 = false;
-        public static int window_x = 3 * Screen.width / 4;
+        public static int window_x = Screen.width / 2; // 3 * Screen.width / 4
         public static int window_y = 0;
-        public static int window_width = Screen.width / 4;
+        public static int window_width = Screen.width / 2; // Screen.width / 4
         public static int window_height = Screen.height;
 
         public static float window_offset_x = 0;//溢出偏移
@@ -31,7 +31,7 @@ namespace Qtool
         public static float frame_offset_y = 0;//纵向溢出偏移
 
 
-        public static int columnDefault = 10;
+        public static int columnDefault = 20;
         public static float side = 0;//格子边长
         public static float padx = 4;//格子间距
         public static float pady = 4;//边界距离
@@ -45,7 +45,7 @@ namespace Qtool
         {
             columnDefault -= (int)Input.mouseScrollDelta.y;
             columnDefault = columnDefault <  4 ?  4 : columnDefault;
-            columnDefault = columnDefault > 15 ? 15 : columnDefault;
+            columnDefault = columnDefault > 35 ? 35 : columnDefault;
             side = (window_width - 2 * frame_padx - (columnDefault - 1) * padx) / columnDefault;
 
         }
@@ -236,7 +236,7 @@ namespace Qtool
             float left = frame_padx + offset_x;
             float topb = frame_pady + height1 + height2 + offset_y;
 
-            float x = left + col * (side + padx);
+            float x = left + col * (side + padx * 5);
             float y = topb + row * (side + pady);
             return new Rect(x, y, side, side);
         }
@@ -248,7 +248,7 @@ namespace Qtool
             float left = frame_padx + offset_x;
             float topb = frame_pady + height1 + height2 + offset_y;
 
-            float x = left + col * (side + padx);
+            float x = left + col * (side + padx * 5);
             float y = topb + row * (side + pady) - side / 3;
             return new Rect(x, y, 2 * side, side / 3);
 
@@ -261,7 +261,7 @@ namespace Qtool
             float topb = frame_pady + height1 + height2 + offset_y;
 
             row += 1;
-            float x = left + col * (side + padx);
+            float x = left + col * (side + padx * 5);
             float y = topb + row * (side + pady) - side / 8;
             return new Rect(x, y, 2 * side, side / 3);
 
