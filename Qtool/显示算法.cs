@@ -177,6 +177,30 @@ namespace Qtool
         }
 
 
+        public Rect newrectFrameLayer(int row, int col)
+        {
+            get鼠标更新();
+
+            float left = frame_padx;
+            float topb = frame_pady + height1 + height2;
+
+            float x = left + col * (side + padx);
+            float y = topb + row * (side + pady);
+            return new Rect(x, y, side, side);
+        }
+
+        public Rect newrectFrameLayerName(int row, int col)
+        {
+            get鼠标更新();
+            row += 1;
+            float left = frame_padx;
+            float topb = frame_pady + height1 + height2;
+
+            float x = left + col * (side + padx);
+            float y = topb + row * (side + pady) - side / 3;
+            return new Rect(x, y, side*2, side - side / 3);
+        }
+
 
 
         public Rect newrectFrameLayerXY(int i)

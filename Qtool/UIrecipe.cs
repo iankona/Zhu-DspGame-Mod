@@ -5,30 +5,31 @@ using UnityEngine;
 namespace Qtool
 {
 
-    //public class FrameRecipe
-    //{
+    public class FrameRecipe
+    {
 
-    //    public void showRecipes()
-    //    {
+        public void showRecipes()
+        {
 
-    //        int i = 0;
-    //        foreach (RecipeProto tempRecipeProto in LDB.recipes.dataArray)
-    //        {
-    //            if (tempRecipeProto.Results.Length < 1)
-    //                continue;
+            int i = 0;
+            foreach (RecipeProto recipeProto in LDB.recipes.dataArray)
+            {
+                if (recipeProto.Results.Length < 1)
+                    continue;
 
-    //            if (GUI.Button(Plugin.实例.position.newrectFrameLayer(i), tempRecipeProto.iconSprite.texture))
-    //            {
-    //                Plugin.实例.selectedRecipeId = tempRecipeProto.ID;
-    //                Plugin.实例.windown.guilayerindex = 3;
-    //            }
-    //            i++;
+                if (GUI.Button(Plugin.实例.布局.newrectFrameLayer(i), recipeProto.iconSprite.texture))
+                {
+                    Plugin.实例.界面.guilayerindex = 22;
+                    Plugin.实例.配方ID = recipeProto.ID;
+                    Debug.Log("选择配方::" + recipeProto.Name + "::" + recipeProto.ID);
+                }
+                i++;
 
-    //        }
-            
+            }
 
-    //    }
-    //}
+
+        }
+    }
 
 
 

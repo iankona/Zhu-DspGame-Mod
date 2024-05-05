@@ -18,9 +18,12 @@ namespace Qtool
 
 
         public FrameItem 物品界面 = new FrameItem();
-        //public FrameRecipe 配方界面 = new FrameRecipe();
-        //public FrameRecipeNode 配方节点界面 = new FrameRecipeNode();
-        public FrameRecipeTree 配方树枝界面 = new FrameRecipeTree();
+        public FrameItemTree 物品树枝界面 = new FrameItemTree();
+        // public FrameItemTree 物品树枝界面 = new FrameItemTree();
+
+        public FrameRecipe 配方界面 = new FrameRecipe();
+        public FrameRecipeNode 配方节点界面 = new FrameRecipeNode();
+
 
         //public FrameSprite 图标界面 = new FrameSprite();
         //public FrameTest 测试界面 = new FrameTest();
@@ -47,53 +50,20 @@ namespace Qtool
         {
             GUILayout.BeginArea(Plugin.实例.布局.newrectFrameRivet());
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("Items"))
-            {
-                guilayerindex = 1;
-                //Debug.Log("Got a click");
-            }
-            if (GUILayout.Button("Recipes"))
-            {
-                guilayerindex = 2;
-                //Debug.Log("Got a click");
-            }
+            if (GUILayout.Button("Items")) { guilayerindex = 1; }
+            if (GUILayout.Button("ItemTree")) { guilayerindex = 2; }
+            if (GUILayout.Button("Item统计")) { guilayerindex = 3; }
+            if (GUILayout.Button("ItemDepth")) { guilayerindex = 4; }
+            if (GUILayout.Button("ItemDepth")) { guilayerindex = 5; }
 
-            if (GUILayout.Button("RecipeNode"))
-            {
-                guilayerindex = 3;
-                //Debug.Log("Got a click");
-            }
+            if (GUILayout.Button("Recipes")) { guilayerindex = 21; }
+            if (GUILayout.Button("RecipeNode")) { guilayerindex = 22; }
 
-            if (GUILayout.Button("RecipeTree"))
-            {
-                guilayerindex = 4;
-                //Debug.Log("Got a click");
-            }
+            if (GUILayout.Button("Sprites")) { guilayerindex = 31; }
+            if (GUILayout.Button("Tests")) { guilayerindex = 32; }
+            if (GUILayout.Button("Lines")) { guilayerindex = 33; }
+            if (GUILayout.Button("Textures")) { guilayerindex = 34; }
 
-
-            if (GUILayout.Button("Sprites"))
-            {
-                guilayerindex = 11;
-                //Debug.Log("Got a click");
-            }
-
-
-            if (GUILayout.Button("Tests"))
-            {
-                guilayerindex = 12;
-                //Debug.Log("Got a click");
-            }
-            if (GUILayout.Button("Lines"))
-            {
-                guilayerindex = 13;
-                //Debug.Log("Got a click");
-            }
-
-            if (GUILayout.Button("Textures"))
-            {
-                guilayerindex = 14;
-                //Debug.Log("Got a click");
-            }
 
             GUILayout.EndHorizontal();
             GUILayout.EndArea();
@@ -106,37 +76,42 @@ namespace Qtool
                 case 1:
                     物品界面.showItems();
                     break;
-                //case 2:
-                //    配方界面.showRecipes();
-                //    break;
-                //case 3:
-                //    配方节点界面.showRecipeNode();
-                //    break;
-                case 4:
-                    配方树枝界面.showRecipeTree();
+
+                case 2:
+                    物品树枝界面.updateTree();
+                    物品树枝界面.showRecipeSelect();
+                    物品树枝界面.showRecipeTree();
                     break;
 
-                //case 11:
-                //    图标界面.showSprites();
-                //    break;
+                case 21:
+                    配方界面.showRecipes();
+                    break;
 
-                //case 12:
-                //    测试界面.showTests();
-                //    break;
-                //case 13:
-                //    直线界面.showLines();
-                //    break;
+                case 22:
+                    配方节点界面.showRecipeNodes();
+                    break;
 
-                //case 14:
-                //    贴图界面.showTextures();
-                //    break;
+                    //case 11:
+                    //    图标界面.showSprites();
+                    //    break;
+
+                    //case 12:
+                    //    测试界面.showTests();
+                    //    break;
+                    //case 13:
+                    //    直线界面.showLines();
+                    //    break;
+
+                    //case 14:
+                    //    贴图界面.showTextures();
+                    //    break;
 
 
 
 
             }
 
-            }
+        }
 
 
 

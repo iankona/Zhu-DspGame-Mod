@@ -28,17 +28,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Qtool.cs" />
+    <Compile Include="UIitem统计.cs" />
     <Compile Include="UIwindown.cs" />
     <Compile Include="UIline.cs" />
     <Compile Include="UIitem.cs" />
-    <Compile Include="UIrecipenode.cs" />    
+    <Compile Include="UIrecipenode.cs" />
     <Compile Include="UIrecipe.cs" />
-    <Compile Include="UIrecipetree.cs" />
+    <Compile Include="UIitemtree.cs" />
     <Compile Include="UIsprite.cs" />
     <Compile Include="UItest.cs" />
     <Compile Include="UItexture.cs" />
     <Compile Include="文本翻译.cs" />
     <Compile Include="节点递归.cs" />
+    <Compile Include="节点计算.cs" />
     <Compile Include="显示算法.cs" />
     <Compile Include="顶层逻辑.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

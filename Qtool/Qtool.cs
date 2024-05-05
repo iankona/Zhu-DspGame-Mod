@@ -19,6 +19,7 @@ namespace Qtool
         public static 绘制逻辑 实例;
 
 
+
         public void Start()
         {
             实例 = new 绘制逻辑();

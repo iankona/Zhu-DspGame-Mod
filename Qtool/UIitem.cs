@@ -16,17 +16,17 @@ namespace Qtool
         {
 
             int i = 0;
-            foreach (ItemProto tempItemProto in LDB.items.dataArray)
+            foreach (ItemProto itemProto in LDB.items.dataArray)
             {
-                if (tempItemProto.recipes.Count < 1)
+                if (itemProto.recipes.Count < 1)
                     continue;
 
-                if (GUI.Button(Plugin.实例.布局.newrectFrameLayerXY(i), tempItemProto.iconSprite.texture))
+                if (GUI.Button(Plugin.实例.布局.newrectFrameLayer(i), itemProto.iconSprite.texture))
                 {
-                    Plugin.实例.界面.guilayerindex = 4;
-                    Plugin.实例.物品ID = tempItemProto.ID;
+                    Plugin.实例.界面.guilayerindex = 2;
+                    Plugin.实例.物品ID = itemProto.ID;
                     Plugin.实例.物品树需要更新 = true;
-                    // Debug.Log("选择物品ID::"+ tempItemProto.Name + "::" + tempItemProto.ID);
+                    // Debug.Log("选择物品ID::"+ itemProto.Name + "::" + itemProto.ID);
                 }
                 i++;
 
