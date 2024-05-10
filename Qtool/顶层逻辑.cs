@@ -1,6 +1,7 @@
 ﻿
 
 using Compressions;
+using System.Collections.Generic;
 using System.Security.Policy;
 using System.Threading;
 using UnityEngine;
@@ -18,10 +19,16 @@ namespace Qtool
         bool 按键按下 = false;
         bool 鼠标按下 = false;
 
-
-        public int 物品ID = 0;
-        public int 配方ID = 0;
+        public int 物品ID = -1;
+        public int 配方ID = -1;
+        public NodeTree itemTree = null;
+        public RecipeInfoList item汇总 = null;
         public bool 物品树需要更新 = false;
+
+        public 物品配方索引处理 物品配方索引 = null;
+        public ItemSelectList 物品多选 = null;
+        public List<NodeTree> 树枝列表 = null;
+        public RecipeStatistics 树枝统计 = null;
 
         public 鼠标更新 事件 = new 鼠标更新();
         public 部件方框 布局 = new 部件方框();

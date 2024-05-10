@@ -37,7 +37,7 @@ namespace Qtool
     {
         public List<ItemRecipeIndex> 记录列表 = new List<ItemRecipeIndex>(1024);
         public List<ItemRecipeIndex> 显示列表 = new List<ItemRecipeIndex>(1024);
-        public 物品配方索引处理()
+        public void 初始化()
         {
             记录列表.Clear();
             for (int i = 0; i < LDB.items.Length; i++)
@@ -132,7 +132,6 @@ namespace Qtool
 
     public class NodeTree
     {
-        public 物品配方索引处理 物品配方索引 = new 物品配方索引处理();
         public NodeIteration root;
         public List<NodeIteration> allNodes = new List<NodeIteration>(2048);
         public List<NodeIteration> endNodes = new List<NodeIteration>(1024);
@@ -147,7 +146,7 @@ namespace Qtool
 
 
 
-        public void setRootItem(ItemProto itemProto)
+        public void setRootItem(ItemProto itemProto, ref 物品配方索引处理 物品配方索引)
         {
             root = NodeIteration.setRootItem(itemProto, ref 物品配方索引);
             if (root == null)
@@ -159,12 +158,33 @@ namespace Qtool
             setEndNodesColumn(); // == setAllNodesColumn();
             setAllNodesChildColumn();
             // 物品层级.setLayerNodesDepth(ref allNodes);
-            NodeIteration.setRootResultValue(root, 61);
 
         }
 
-        public void updateTree()
+
+        public void setRootResultValue(ItemProto itemProto, int itemValue)
         {
+            if (root == null || root.itemProto.ID != itemProto.ID)
+            {
+                return;
+            }
+            NodeIteration.setRootResultValue(root, itemValue);
+        }
+
+
+        public List<NodeCalculate> getCalcsByRecipeID(int recipeID)
+        {
+
+            List<NodeCalculate> calcs = new List<NodeCalculate> (16);
+            foreach (NodeIteration node in allNodes) 
+            {
+                if (node.calc.recipeProto == null) { continue; } // allNodes是有包含矿物配方,需要处理, calc有new, calc.recipeProto默认未null;
+                if (node.calc.recipeProto.ID == recipeID)
+                    calcs.Add(node.calc);
+            }
+            if (calcs.Count > 0) 
+                return calcs;
+            return null;
         }
 
 
@@ -365,7 +385,7 @@ namespace Qtool
 
             for (int i = 0; i < childNodes.Count; i++)
             {
-                childNodes[i].calc.resultValue = calc.itemValues[i];
+                childNodes[i].calc.resultValue = calc.ItemValues[i];
                 childNodes[i].calculate递归更新();
             }
 

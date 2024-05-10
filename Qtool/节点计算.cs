@@ -13,15 +13,18 @@ namespace Qtool
 
     public class NodeCalculate
     {
-        public ItemProto itemProto;
-        public RecipeProto recipeProto;
+        public ItemProto itemProto = null;
+        public RecipeProto recipeProto = null;
 
         public float resultValue = 0.0f;
-        public List<float> resultValues = new List<float>(8);
+        public List<float> ResultValues = new List<float>(8);
+        public List<float> ItemValues = new List<float>(8);
+
+
         public float 单个配方分钟产量 = 0;
         public float 配方数量 = 0;
         public int 设备ID = 0;
-        public List<float> itemValues = new List<float>(8);
+
 
 
         public void 计算()
@@ -45,19 +48,19 @@ namespace Qtool
             单个配方分钟产量 = recipeProto.ResultCounts[index1] * 每分钟执行次数;
             配方数量 = resultValue / 单个配方分钟产量;
 
-            resultValues.Clear();
+            ResultValues.Clear();
             for (int i = 0; i < recipeProto.ResultCounts.Length; i++)
             {
                 float resultValue1 = recipeProto.ResultCounts[i] * 每分钟执行次数 * 配方数量;
-                resultValues.Add(resultValue1);
+                ResultValues.Add(resultValue1);
 
             }
             
-            itemValues.Clear();
+            ItemValues.Clear();
             for (int i = 0; i < recipeProto.ItemCounts.Length; i++)
             {
                 float itemValue1 = recipeProto.ItemCounts[i] * 每分钟执行次数 * 配方数量;
-                itemValues.Add(itemValue1);
+                ItemValues.Add(itemValue1);
 
             }
 

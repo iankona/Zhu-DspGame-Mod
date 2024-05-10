@@ -124,7 +124,7 @@ namespace Qtool
         float height5 = 0;
 
 
-        public void get鼠标更新()
+        void get鼠标更新()
         {
             frame_padx = 鼠标更新.frame_padx;
             frame_pady = 鼠标更新.frame_pady;
@@ -143,6 +143,17 @@ namespace Qtool
 
         }
 
+
+        public void set字体比例(float scale)
+        {
+            if (scale <= 0 )
+                return;
+            GUI.skin.label.fontSize = (int)(side * scale);
+            GUI.skin.button.fontSize = (int)(side * scale);
+            GUI.skin.textField.fontSize = (int)(side * scale);
+        }
+
+
         public Rect newrectWindown()
         {
             int window_x = 鼠标更新.window_x + (int)鼠标更新.window_offset_x;
@@ -159,7 +170,7 @@ namespace Qtool
             int fondSize = 13;
             GUI.skin.button.fontSize = fondSize;
             float topb = height1;
-            height2 = fondSize + frame_pady;
+            height2 = (fondSize + frame_pady)*3.7f;
             return new Rect(frame_padx, topb, 鼠标更新.window_width - 2 * frame_padx, height2);
         }
 
@@ -293,7 +304,44 @@ namespace Qtool
 
 
 
+        public Rect newrectFrameRecipeText上方(int row, int col)
+        {
+            get鼠标更新();
+            row += 1;
+            float left = frame_padx + offset_x;
+            float topb = frame_pady + height1 + height2 + offset_y;
 
+            float x = left + col * (side + padx * 5);
+            float y = topb + row * (side + pady) - side;
+            return new Rect(x, y, side, side / 3);
+
+        }
+
+        public Rect newrectFrameRecipeText中间(int row, int col)
+        {
+            get鼠标更新();
+            row += 1;
+            float left = frame_padx + offset_x;
+            float topb = frame_pady + height1 + height2 + offset_y;
+
+            float x = left + col * (side + padx * 5);
+            float y = topb + row * (side + pady) - side / 3*2;
+            return new Rect(x, y, side, side / 3);
+
+        }
+
+        public Rect newrectFrameRecipeText下方(int row, int col)
+        {
+            get鼠标更新();
+            row += 1;
+            float left = frame_padx + offset_x;
+            float topb = frame_pady + height1 + height2 + offset_y;
+
+            float x = left + col * (side + padx * 5);
+            float y = topb + row * (side + pady) - side / 3;
+            return new Rect(x, y, side, side / 3);
+
+        }
     }
 
 
