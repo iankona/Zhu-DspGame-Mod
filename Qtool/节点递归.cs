@@ -235,14 +235,6 @@ namespace Qtool
             foreach (NodeIteration node in allNodes)
             {
 
-
-                //node.resultColumns.Clear();
-                //for(int i=0; i < node.recipeProto.Results.Length; i++)
-                //{
-                //    node.resultColumns.Add(node.column+i);
-                //}
-
-
                 node.itemColumns.Clear();
                 foreach (NodeIteration child in node.childNodes)
                 {
@@ -263,10 +255,11 @@ namespace Qtool
         public int recipeIndex = -1;
         public RecipeProto recipeProto = null;
         public List<ItemProto> childItems = new List<ItemProto>(8);
+        public List<int> itemColumns = new List<int>(8);
         public List<NodeIteration> childNodes = new List<NodeIteration>(8);
 
         //public List<int> resultColumns = new List<int>(8);
-        public List<int> itemColumns = new List<int>(8);
+
         public NodeCalculate calc = new NodeCalculate();
 
 

@@ -25,7 +25,7 @@ namespace Qtool
                 {
                     Plugin.实例.界面.guilayerindex = 2;
                     Plugin.实例.物品ID = itemProto.ID;
-                    Debug.Log("选择物品ID::"+ itemProto.Name + "::" + itemProto.ID);
+                    //Debug.Log("选择物品ID::"+ itemProto.Name + "::" + itemProto.ID);
                 }
                 i++;
 

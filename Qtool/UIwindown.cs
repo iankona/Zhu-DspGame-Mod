@@ -23,7 +23,9 @@ namespace Qtool
         public FrameItem 物品界面 = new FrameItem();
         public FrameItemTree 物品树枝界面 = new FrameItemTree();
         public FrameItem统计 物品统计界面 = new FrameItem统计();
+        public FrameItemInverte 物品反向界面 = new FrameItemInverte();
         public FrameItemRecipe 物品配方界面 = new FrameItemRecipe();
+
 
 
         //public FrameSprite 图标界面 = new FrameSprite();
@@ -64,7 +66,7 @@ namespace Qtool
             if (GUILayout.Button("Select物品")) { guilayerindex = 21; }
             if (GUILayout.Button("Select量化")) { guilayerindex = 22; }
             if (GUILayout.Button("Select统计")) { guilayerindex = 23; }
-            if (GUILayout.Button("Select估算")) { guilayerindex = 24; }
+            if (GUILayout.Button("Select反向")) { guilayerindex = 24; }
             if (GUILayout.Button("Select配方")) { guilayerindex = 25; }
             GUILayout.EndHorizontal();
 
@@ -72,7 +74,7 @@ namespace Qtool
             if (GUILayout.Button("Items")) { guilayerindex = 1; }
             if (GUILayout.Button("Item量化")) { guilayerindex = 2; }
             if (GUILayout.Button("Item统计")) { guilayerindex = 3; }
-            if (GUILayout.Button("Item估算")) { guilayerindex = 4; }
+            if (GUILayout.Button("Item反向")) { guilayerindex = 4; }
             if (GUILayout.Button("Item配方")) { guilayerindex = 5; }
             GUILayout.EndHorizontal();
 
@@ -95,7 +97,9 @@ namespace Qtool
                     物品统计界面.showRecipe统计();
                     break;
 
-
+                case 4:
+                    物品反向界面.showTree();
+                    break;
 
                 case 5:
                     物品配方界面.showRecipeNodes();

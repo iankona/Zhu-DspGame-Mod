@@ -23,7 +23,8 @@ namespace Qtool
         public int 配方ID = -1;
         public NodeTree itemTree = null;
         public RecipeInfoList item汇总 = null;
-        public bool 物品树需要更新 = false;
+        public UpTree upTree = null;
+
 
         public 物品配方索引处理 物品配方索引 = null;
         public ItemSelectList 物品多选 = null;
