@@ -17,26 +17,28 @@ namespace Qtool
 
         public FrameSelectItem 物品多选界面 = new FrameSelectItem();
         public FrameSelectTree 物品多选树枝界面 = new FrameSelectTree();
-        public FrameSelect统计 物品多选统计界面 = new FrameSelect统计();
+        public FrameSelect统计物品 物品多选统计物品界面 = new FrameSelect统计物品();
+        public FrameSelect统计配方 物品多选统计配方界面 = new FrameSelect统计配方();
 
 
         public FrameItem 物品界面 = new FrameItem();
         public FrameItemTree 物品树枝界面 = new FrameItemTree();
         public FrameItem统计 物品统计界面 = new FrameItem统计();
         public FrameItemInverte 物品反向界面 = new FrameItemInverte();
+        public FrameItemInverteCalculate 物品反算界面 = new FrameItemInverteCalculate();
         public FrameItemRecipe 物品配方界面 = new FrameItemRecipe();
 
 
 
-        //public FrameSprite 图标界面 = new FrameSprite();
+        public FrameSprite 图标界面 = new FrameSprite();
+        public FrameTexture 贴图界面 = new FrameTexture();
+        //public FrameTexture 贴图界面 = new FrameTexture();
         //public FrameTest 测试界面 = new FrameTest();
         //public FrameLine 直线界面 = new FrameLine();
-        //public FrameTexture 贴图界面 = new FrameTexture();
-
         public void showWindown()
         {
 
-            GUI.Window(0, Plugin.实例.布局.newrectWindown(), drawWindowFunction, "啊啊啊~");
+            GUI.Window(0, Plugin.实例.布局.newrectWindown(), drawWindowFunction, "ZhuQtool3.2~");
 
         }
 
@@ -56,18 +58,22 @@ namespace Qtool
 
             GUILayout.BeginHorizontal();
             if (GUILayout.Button("Sprites")) { guilayerindex = 31; }
-            if (GUILayout.Button("Tests")) { guilayerindex = 32; }
+            if (GUILayout.Button("Textures")) { guilayerindex = 32; }
             if (GUILayout.Button("Lines")) { guilayerindex = 33; }
-            if (GUILayout.Button("Textures")) { guilayerindex = 34; }
-            if (GUILayout.Button("Textures")) { guilayerindex = 35; }
+            if (GUILayout.Button("LineTexture")) { guilayerindex = 34; }
+            if (GUILayout.Button("LineWhite")) { guilayerindex = 35; }
+            if (GUILayout.Button("LineColor")) { guilayerindex = 36; }
+            if (GUILayout.Button("Tests")) { guilayerindex = 37; }
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
             if (GUILayout.Button("Select物品")) { guilayerindex = 21; }
             if (GUILayout.Button("Select量化")) { guilayerindex = 22; }
             if (GUILayout.Button("Select统计")) { guilayerindex = 23; }
-            if (GUILayout.Button("Select反向")) { guilayerindex = 24; }
-            if (GUILayout.Button("Select配方")) { guilayerindex = 25; }
+            if (GUILayout.Button("Select统计")) { guilayerindex = 24; }
+            //if (GUILayout.Button("Select反向")) { guilayerindex = 25; }
+            //if (GUILayout.Button("Select反算")) { guilayerindex = 25; }
+            //if (GUILayout.Button("Select配方")) { guilayerindex = 26; }
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
@@ -75,7 +81,8 @@ namespace Qtool
             if (GUILayout.Button("Item量化")) { guilayerindex = 2; }
             if (GUILayout.Button("Item统计")) { guilayerindex = 3; }
             if (GUILayout.Button("Item反向")) { guilayerindex = 4; }
-            if (GUILayout.Button("Item配方")) { guilayerindex = 5; }
+            if (GUILayout.Button("Item反算")) { guilayerindex = 5; }
+            if (GUILayout.Button("Item配方")) { guilayerindex = 6; }
             GUILayout.EndHorizontal();
 
             // GUILayout.EndVertical();
@@ -102,6 +109,11 @@ namespace Qtool
                     break;
 
                 case 5:
+                    物品反算界面.showElement();
+                    break;
+
+
+                case 6:
                     物品配方界面.showRecipeNodes();
                     break;
 
@@ -114,7 +126,11 @@ namespace Qtool
                     break;
 
                 case 23:
-                    物品多选统计界面.showRecipe统计();
+                    物品多选统计物品界面.showItem统计();
+                    break;
+
+                case 24:
+                    物品多选统计配方界面.showRecipe统计();
                     break;
 
 

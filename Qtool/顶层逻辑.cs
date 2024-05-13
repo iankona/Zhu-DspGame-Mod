@@ -22,14 +22,16 @@ namespace Qtool
         public int 物品ID = -1;
         public int 配方ID = -1;
         public NodeTree itemTree = null;
-        public RecipeInfoList item汇总 = null;
+        public ItemInfoList item汇总 = null;
+        public RecipeInfoList recipe汇总 = null;
         public UpTree upTree = null;
 
 
         public 物品配方索引处理 物品配方索引 = null;
         public ItemSelectList 物品多选 = null;
-        public List<NodeTree> 树枝列表 = null;
-        public RecipeStatistics 树枝统计 = null;
+        public List<NodeTree> itemTreeList = null;
+        public 物品统计处理 物品统计 = null;
+        public 配方统计处理 配方统计 = null;
 
         public 鼠标更新 事件 = new 鼠标更新();
         public 部件方框 布局 = new 部件方框();

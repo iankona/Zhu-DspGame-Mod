@@ -19,26 +19,26 @@ using UnityEngine.UI;
 
 namespace Qtool
 {
-    //public class FrameSprite
-    //{
-    //    public void showSprites()
-    //    {
-    //        Sprite[] 列表 = (Sprite[])UnityEngine.Resources.FindObjectsOfTypeAll(typeof(Sprite));
+    public class FrameSprite
+    {
+        public void showSprites()
+        {
+            Sprite[] 列表 = (Sprite[])UnityEngine.Resources.FindObjectsOfTypeAll(typeof(Sprite));
 
-    //        int i = 0;
-    //        foreach (Sprite icon in 列表)
-    //        {
-    //            GUI.DrawTexture(Plugin.实例.position.newrectFrameLayerY(i), icon.texture);
-    //            GUI.Box(Plugin.实例.position.newrectFrameLayerY(i), i.ToString());
-    //            i++;
-    //        }
-
-
-    //    }
+            int i = 0;
+            foreach (Sprite icon in 列表)
+            {
+                GUI.DrawTexture(Plugin.实例.布局.newrectFrameLayerY(i), icon.texture);
+                GUI.Box(Plugin.实例.布局.newrectFrameLayerY(i), i.ToString());
+                i++;
+            }
 
 
+        }
 
-    //}
+
+
+    }
 
 
 

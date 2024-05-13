@@ -10,8 +10,7 @@ namespace Qtool
 
     public class FrameItemInverte
     {
-        物品配方索引处理 物品配方索引 = null;
-        int 配方Index = -1;
+
 
         ItemProto itemProto = null;
         int itemValue = 60;
@@ -23,42 +22,11 @@ namespace Qtool
 
 
 
-        void update物品配方索引()
+
+
+
+        void updateUpTree()
         {
-            if (Plugin.实例.物品配方索引 == null)
-            {
-                物品配方索引处理 物品配方索引 = new 物品配方索引处理();
-                物品配方索引.初始化();
-                Plugin.实例.物品配方索引 = 物品配方索引;
-
-            }
-            else
-            {
-                物品配方索引 = Plugin.实例.物品配方索引;
-            }
-        }
-
-
-        //void updateItem汇总()
-        //{
-        //    if (Plugin.实例.item汇总 == null) // 延迟到游戏加载完成后，再初始化，防止调用游戏对象时出现null错误
-        //    {
-        //        item汇总 = new RecipeInfoList();
-        //        Plugin.实例.item汇总 = item汇总;
-        //    }
-        //    else
-        //    {
-        //        item汇总 = Plugin.实例.item汇总;
-        //    }
-
-        //}
-
-
-        void updateupTree()
-        {
-            if (物品配方索引 == null)
-                return;
-
             if (Plugin.实例.upTree == null) // 延迟到游戏加载完成后，再初始化，防止调用游戏对象时出现null错误
             {
                 upTree = new UpTree();
@@ -105,14 +73,87 @@ namespace Qtool
 
         public void showTree()
         {
-            update物品配方索引();
-            updateupTree();
+            updateUpTree();
+            draw基础矿物();
+            drawInverteSelect();
+            drawUpTreeEndItems();
             drawInverteTree();
+        }
+
+
+        void draw基础矿物() 
+        {
+            int i = 0;
+            int row = 0;
+            foreach(ItemProto itemProto in LDB.items.dataArray)
+            {
+                if (itemProto.recipes.Count > 0)
+                    continue;
+                int col = i;
+                GUI.Box(Plugin.实例.布局.newrectFrameRecipeIconX(row, col), itemProto.iconSprite.texture);
+                GUI.Label(Plugin.实例.布局.newrectFrameRecipeNameX(row, col), itemProto.Name);
+                i++;
+            }
+        }
+
+
+        void drawInverteSelect()
+        {
+            if (upTree == null)
+                return;
+
+            UpIteration node = upTree.Select(selectItemID);
+            if (node == null)
+                return;
+            int row = 1;
+            int col = 0;
+            drawInverteSelectBox(row, col, node.childNodes.Count);
+
+            GUI.Box(Plugin.实例.布局.newrectFrameRecipeIconX(row, col), node.itemProto.iconSprite.texture);
+            GUI.Label(Plugin.实例.布局.newrectFrameRecipeNameX(row, col), node.itemProto.Name);
+
+
+
+
+            int i = 0;
+            foreach (UpIteration child in node.childNodes)
+            {
+                GUI.Box(Plugin.实例.布局.newrectFrameRecipeIconX(row + 2, i), child.itemProto.iconSprite.texture);
+                GUI.Label(Plugin.实例.布局.newrectFrameRecipeNameX(row + 2, i), child.itemProto.Name);
+                i++;
+            }
+        }
+
+        void drawInverteSelectBox(int row, int col, int length)
+        {
+            if (length<=1)
+                return;
+
+            Rect startRect = Plugin.实例.布局.newrectFrameRecipeIconX(row, col);
+            Rect finalRect = Plugin.实例.布局.newrectFrameRecipeIconX(row + 2, col + length - 1);
+            float width = finalRect.x - startRect.x + finalRect.width;
+            float height = finalRect.y - startRect.y + finalRect.height;
+            GUI.Box(new Rect(startRect.x, startRect.y, width, height), "");
+
         }
 
 
 
 
+        void drawUpTreeEndItems()
+        {
+            if (upTree == null)
+                return;
+
+            int i= 0;
+            int row = 4;
+            foreach(ItemProto itemProto in upTree.endItemProtoNoRepeat) 
+            {
+                GUI.Box(Plugin.实例.布局.newrectFrameLayerColumn(row, i), itemProto.iconSprite.texture);
+                GUI.Label(Plugin.实例.布局.newrectFrameLayerColumnName(row, i), itemProto.Name);
+                i++;
+            }
+        }
 
 
         void drawInverteTree()
@@ -121,56 +162,17 @@ namespace Qtool
             if (upTree == null)
                 return;
 
-
-            drawInverteSelect();
-
-
-
             int row = 0;
             int col = 0;
-            foreach(UpIteration node in upTree.allNodes)
+            foreach (UpIteration node in upTree.allNodes)
             {
-                row = node.depth * 4 + 8; // 3+1
-                col = node.column + 3;
+                row = node.depth * 4 + 10; // 3+1
+                col = node.column;
                 drawInverteBox(row, col, node);
                 drawInverteUpNode(row, col, node);
             }
 
 
-        }
-
-        void drawInverteSelectBox(int row, int col, int length)
-        {
-            if (length<=1)
-                return;
-
-            Rect startRect = Plugin.实例.布局.newrectFrameLayer(row, col);
-            Rect finalRect = Plugin.实例.布局.newrectFrameLayer(row + 2, col + length - 1);
-            float width = finalRect.x - startRect.x + finalRect.width;
-            float height = finalRect.y - startRect.y + finalRect.height;
-            GUI.Box(new Rect(startRect.x, startRect.y, width, height), "");
-
-        }
-
-
-        void drawInverteSelect() 
-        {
-            UpIteration node = upTree.Select(selectItemID);
-            if (node == null)
-                return;
-            int row = 0;
-            int col = 0;
-            drawInverteSelectBox(row, col, node.childNodes.Count);
-
-            GUI.Box(Plugin.实例.布局.newrectFrameLayer(row, col), node.itemProto.iconSprite.texture);
-            GUI.Label(Plugin.实例.布局.newrectFrameLayerName(row, col), node.itemProto.Name);
-            int i = 0;
-            foreach (UpIteration child in node.childNodes)
-            {
-                GUI.Box(Plugin.实例.布局.newrectFrameLayerColumn(row + 1, i), child.itemProto.iconSprite.texture);
-                GUI.Label(Plugin.实例.布局.newrectFrameLayerColumnName(row + 1, i), child.itemProto.Name);
-                i++;
-            }
         }
 
         void drawInverteBox(int row, int col, UpIteration node)
@@ -189,7 +191,7 @@ namespace Qtool
                     maxcolumn = column;
             }
 
-            int column2 = maxcolumn + 3;// 3 维持整体偏移一致
+            int column2 = maxcolumn;// 3 维持整体偏移一致
             Rect finalRect = Plugin.实例.布局.newrectFrameRecipeIcon(row + 2, column2);
             float width = finalRect.x - startRect.x + finalRect.width; 
             float height = finalRect.y - startRect.y + finalRect.height;
@@ -200,12 +202,13 @@ namespace Qtool
 
         void drawInverteUpNode(int row, int col, UpIteration node) 
         {
-            GUI.Box(Plugin.实例.布局.newrectFrameRecipeIcon(row+0, col), node.itemProto.iconSprite.texture);
+            if (GUI.Button(Plugin.实例.布局.newrectFrameRecipeIcon(row + 0, col), node.itemProto.iconSprite.texture))
+                selectItemID = node.itemProto.ID;
             GUI.Label(Plugin.实例.布局.newrectFrameRecipeName(row+0, col), node.itemProto.Name);
 
             foreach(UpIteration child in node.childNodes)
             {
-                int column1 = child.column + 3;// 3 维持整体偏移一致
+                int column1 = child.column;// 3 维持整体偏移一致
                 GUI.Box(Plugin.实例.布局.newrectFrameRecipeIcon(row+2, column1), child.itemProto.iconSprite.texture);
                 GUI.Label(Plugin.实例.布局.newrectFrameRecipeName(row+2, column1), child.itemProto.Name);
             }

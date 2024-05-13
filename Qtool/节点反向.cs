@@ -174,6 +174,10 @@ namespace Qtool
         public List<UpIteration> allNodes = new List<UpIteration>(2048);
         public List<UpIteration> endNodes = new List<UpIteration>(1024);
 
+        public List<ItemProto> allItemProtoNoRepeat = new List<ItemProto>(64);
+        public List<ItemProto> endItemProtoNoRepeat = new List<ItemProto>(64);
+
+
         public void Clear()
         {
             root = null;
@@ -203,7 +207,9 @@ namespace Qtool
             getEndNodes();
             setEndNodesColumn();
             setEndNodesDepth();
-            setAllNodesChildColumn();
+            getChildColumns();
+            getAllItemsNoRepeat();
+            getEndItemsNoRepeat();
 
         }
 
@@ -235,7 +241,7 @@ namespace Qtool
 
         void setEndNodesColumn()
         {
-            int i = 2;
+            int i = 1; // 列整体偏移
             foreach (UpIteration end in endNodes)
             {
                 UpIteration.setEndItemColumn(end, i);
@@ -262,7 +268,7 @@ namespace Qtool
 
         }
 
-        void setAllNodesChildColumn()
+        void getChildColumns()
         {
 
             foreach (UpIteration node in allNodes)
@@ -275,6 +281,56 @@ namespace Qtool
             }
 
         }
+
+        bool inResultItem(ItemProto itemProto1, List<ItemProto> 列表)
+        {
+            bool 在列表里 = false;
+            foreach (ItemProto itemProto2 in 列表)
+            {
+                if (itemProto1.ID == itemProto2.ID)
+                {
+                    在列表里 = true;
+                }
+            }
+            return 在列表里;
+        }
+
+
+        void getAllItemsNoRepeat() 
+        {
+            allItemProtoNoRepeat.Clear();
+            int i = 0;
+            foreach (UpIteration node in allNodes)
+            {
+                if (i == 0) // 跳过root
+                {
+                    i++;
+                    continue;
+                }
+                    
+                bool 在列表里 = inResultItem(node.itemProto, allItemProtoNoRepeat);
+                if (在列表里) 
+                    continue;
+                allItemProtoNoRepeat.Add(node.itemProto);
+                i++;
+            }
+            //Debug.Log("allItemProtoNoRepeat.count::" + allItemProtoNoRepeat.Count);
+
+        }
+
+
+        void getEndItemsNoRepeat()
+        {
+            endItemProtoNoRepeat.Clear();
+            foreach (UpIteration node in endNodes)
+            {
+                bool 在列表里 = inResultItem(node.itemProto, endItemProtoNoRepeat);
+                if (在列表里)
+                    continue;
+                endItemProtoNoRepeat.Add(node.itemProto);
+            }
+        }
+
 
     }
 }

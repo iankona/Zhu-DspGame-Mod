@@ -17,7 +17,8 @@ namespace Qtool
         int itemValue = 60;
 
         NodeTree itemTree = null;
-        RecipeInfoList item汇总 = null;
+        ItemInfoList item汇总 = null;
+        RecipeInfoList recipe汇总 = null;
 
 
 
@@ -37,17 +38,32 @@ namespace Qtool
             }
         }
 
-        
+
         void updateItem汇总()
         {
             if (Plugin.实例.item汇总 == null) // 延迟到游戏加载完成后，再初始化，防止调用游戏对象时出现null错误
             {
-                item汇总 = new RecipeInfoList();
+                item汇总 = new ItemInfoList();
                 Plugin.实例.item汇总 = item汇总;
             }
             else
             {
                 item汇总 = Plugin.实例.item汇总;
+            }
+
+        }
+
+
+        void updateRecipe汇总()
+        {
+            if (Plugin.实例.recipe汇总 == null) // 延迟到游戏加载完成后，再初始化，防止调用游戏对象时出现null错误
+            {
+                recipe汇总 = new RecipeInfoList();
+                Plugin.实例.recipe汇总 = recipe汇总;
+            }
+            else
+            {
+                recipe汇总 = Plugin.实例.recipe汇总;
             }
 
         }
@@ -59,6 +75,9 @@ namespace Qtool
                 return;
 
             if (item汇总 == null)
+                return;
+
+            if (recipe汇总 == null)
                 return;
 
             if (Plugin.实例.itemTree == null) // 延迟到游戏加载完成后，再初始化，防止调用游戏对象时出现null错误
@@ -84,9 +103,10 @@ namespace Qtool
                     itemTree.setRootItem(itemProto, ref 物品配方索引);
                     itemTree.setRootResultValue(itemProto, itemValue);
                     item汇总.set树枝(itemTree);
-                    item汇总.setRowStep();
-                    item汇总.new显示列表();
-                    item汇总.update列宽度();
+                    item汇总.updateForShow();
+                    recipe汇总.set树枝(itemTree);
+                    recipe汇总.updateForShow();
+
                 }
                     
             }
@@ -99,9 +119,9 @@ namespace Qtool
                 itemTree.setRootItem(itemProto, ref 物品配方索引);
                 itemTree.setRootResultValue(itemProto, itemValue);
                 item汇总.set树枝(itemTree);
-                item汇总.setRowStep();
-                item汇总.new显示列表();
-                item汇总.update列宽度();
+                item汇总.updateForShow();
+                recipe汇总.set树枝(itemTree);
+                recipe汇总.updateForShow();
             }
 
 
@@ -113,6 +133,7 @@ namespace Qtool
         {
             update物品配方索引();
             updateItem汇总();
+            updateRecipe汇总();
             updateItemTree();
 
             drawRecipeSelect();
@@ -303,7 +324,7 @@ namespace Qtool
             if (GUI.Button(rect1, "更新\n" + itemProto.Name))
             {
                 itemTree.setRootResultValue(itemProto, itemValue);
-                item汇总.set树枝(itemTree);
+                recipe汇总.set树枝(itemTree);
             }
 
         }

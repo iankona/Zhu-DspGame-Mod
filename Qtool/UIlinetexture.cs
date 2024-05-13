@@ -19,30 +19,30 @@ using UnityEngine.UI;
 
 namespace Qtool
 {
-    public class FrameTexture
-    {
+    //public class FrameTexture
+    //{
 
 
-        public void showTextures()
-        {
-            Texture[] 列表 = (Texture[])UnityEngine.Resources.FindObjectsOfTypeAll(typeof(Texture));
+    //    public void showTextures()
+    //    {
+    //        Texture[] 列表 = (Texture[])UnityEngine.Resources.FindObjectsOfTypeAll(typeof(Texture));
 
-            int i = 0;
-            foreach (Texture t in 列表)
-            {
-                GUI.DrawTexture(Plugin.实例.布局.newrectFrameLayerY(i), t);
-                GUI.Box(Plugin.实例.布局.newrectFrameLayerY(i), i.ToString());
-                i++;
-            }
-
-
-
-
-        }
+    //        int i = 0;
+    //        foreach (Texture t in 列表)
+    //        {
+    //            GUI.DrawTexture(Plugin.实例.布局.newrectFrameLayerY(i), t);
+    //            GUI.Box(Plugin.实例.布局.newrectFrameLayerY(i), i.ToString());
+    //            i++;
+    //        }
 
 
 
-    }
+
+    //    }
+
+
+
+    //}
 
 
 

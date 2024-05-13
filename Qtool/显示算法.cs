@@ -246,17 +246,7 @@ namespace Qtool
 
 
 
-        public Rect newrectFrameLayerXY(int i)
-        {
-            get鼠标更新();
 
-            float left = frame_padx + offset_x;
-            float topb = frame_pady + height1 + height2 + offset_y;
-
-            float x = left + i % columnDefault * (side + padx);
-            float y = topb + i / columnDefault * (side + pady);
-            return new Rect(x, y, side, side);
-        }
 
 
         public Rect newrectFrameLayerX(int i)
@@ -283,17 +273,7 @@ namespace Qtool
             return new Rect(x, y, side, side);
         }
 
-        public Rect newrectFrameIconXY(int row, int col) 
-        {
-            get鼠标更新();
 
-            float left = frame_padx + offset_x;
-            float topb = frame_pady + height1 + height2 + offset_y;
-
-            float x = left + col * (side + padx);
-            float y = topb + row * (side + pady);
-            return new Rect(x, y, side, side);
-        }
 
 
         public Rect newrectFrameRecipeIcon(int row, int col)
@@ -336,6 +316,47 @@ namespace Qtool
 
 
 
+
+        public Rect newrectFrameRecipeIcon(int row, int col, int rowspan, int colspan)
+        {
+            get鼠标更新();
+
+            float left = frame_padx + offset_x;
+            float topb = frame_pady + height1 + height2 + offset_y;
+
+            float x = left + col * (side + padx * 5);
+            float y = topb + row * (side + pady);
+            return new Rect(x, y, colspan * side, rowspan * side);
+        }
+
+        public Rect newrectFrameRecipeName(int row, int col, int rowspan, int colspan)
+        {
+            get鼠标更新();
+            row += 1;
+            float left = frame_padx + offset_x;
+            float topb = frame_pady + height1 + height2 + offset_y;
+
+            float x = left + col * (side + padx * 5);
+            float y = topb + row * (side + pady) - side / 3;
+            return new Rect(x, y, colspan * side, side / 3);
+
+        }
+        public Rect newrectFrameRecipeText(int row, int col, int rowspan, int colspan)
+        {
+            get鼠标更新();
+
+            float left = frame_padx + offset_x;
+            float topb = frame_pady + height1 + height2 + offset_y;
+
+            row += 1;
+            float x = left + col * (side + padx * 5);
+            float y = topb + row * (side + pady) - side / 8;
+            return new Rect(x, y, colspan * side, side / 3);
+
+        }
+
+
+
         public Rect newrectFrameRecipeIconX(int row, int col)
         {
             get鼠标更新();
@@ -343,7 +364,7 @@ namespace Qtool
             float left = frame_padx + offset_x;
             float topb = frame_pady + height1 + height2;
 
-            float x = left + col * (side + padx * 5);
+            float x = left + col * (side + padx);
             float y = topb + row * (side + pady);
             return new Rect(x, y, side, side);
         }
@@ -355,11 +376,40 @@ namespace Qtool
             float left = frame_padx + offset_x;
             float topb = frame_pady + height1 + height2;
 
-            float x = left + col * (side + padx * 5);
+            float x = left + col * (side + padx );
+            float y = topb + row * (side + pady) - side / 3;
+            return new Rect(x, y, 2*side, side / 3);
+
+        }
+
+
+
+        public Rect newrectFrameRecipeIconY(int row, int col)
+        {
+            get鼠标更新();
+
+            float left = frame_padx ;
+            float topb = frame_pady + height1 + height2 + offset_y;
+
+            float x = left + col * (side + padx);
+            float y = topb + row * (side + pady);
+            return new Rect(x, y, side, side);
+        }
+
+        public Rect newrectFrameRecipeNameY(int row, int col)
+        {
+            get鼠标更新();
+            row += 1;
+            float left = frame_padx;
+            float topb = frame_pady + height1 + height2 + offset_y;
+
+            float x = left + col * (side + padx);
             float y = topb + row * (side + pady) - side / 3;
             return new Rect(x, y, 2 * side, side / 3);
 
         }
+
+
 
 
 

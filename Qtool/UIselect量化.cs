@@ -10,8 +10,9 @@ namespace Qtool
     {
         物品配方索引处理 物品配方索引 = null;
         ItemSelectList 物品多选 = null;
-        List<NodeTree> 树枝列表 = null;
-        RecipeStatistics 树枝统计 = null;
+        List<NodeTree> itemTreeList = null;
+        物品统计处理 物品统计 = null;
+        配方统计处理 配方统计 = null;
 
         int 配方Index = -1;
         int 多选Index = -1;
@@ -45,61 +46,80 @@ namespace Qtool
                 物品多选 = Plugin.实例.物品多选;
             }
         }
-        void update树枝统计()
+
+
+        void update物品统计()
         {
-            if (Plugin.实例.树枝统计 == null) // 延迟到游戏加载完成后，再初始化，防止调用游戏对象时出现null错误
+            if (Plugin.实例.物品统计 == null) // 延迟到游戏加载完成后，再初始化，防止调用游戏对象时出现null错误
             {
-                树枝统计 = new RecipeStatistics();
-                Plugin.实例.树枝统计 = 树枝统计;
+                物品统计 = new 物品统计处理();
+                Plugin.实例.物品统计 = 物品统计;
             }
             else
             {
-                树枝统计 = Plugin.实例.树枝统计;
+                物品统计 = Plugin.实例.物品统计;
+            }
+
+        }
+
+        void update配方统计()
+        {
+            if (Plugin.实例.配方统计 == null) // 延迟到游戏加载完成后，再初始化，防止调用游戏对象时出现null错误
+            {
+                配方统计 = new 配方统计处理();
+                Plugin.实例.配方统计 = 配方统计;
+            }
+            else
+            {
+                配方统计 = Plugin.实例.配方统计;
             }
 
         }
 
 
-        void update树枝列表()
+        void updateItemTreeList()
         {
             if (物品配方索引 == null)
                 return;
 
-            if (树枝统计 == null)
+            if (物品统计 == null)
                 return;
 
-            if (Plugin.实例.树枝列表 == null) // 延迟到游戏加载完成后，再初始化，防止调用游戏对象时出现null错误
+            if (配方统计 == null)
+                return;
+
+            if (Plugin.实例.itemTreeList == null) // 延迟到游戏加载完成后，再初始化，防止调用游戏对象时出现null错误
             {
-                树枝列表 = new List<NodeTree>(3);
-                Plugin.实例.树枝列表 = 树枝列表;
+                itemTreeList = new List<NodeTree>(3);
+                Plugin.实例.itemTreeList = itemTreeList;
             }
             else
             {
-                树枝列表 = Plugin.实例.树枝列表;
+                itemTreeList = Plugin.实例.itemTreeList;
             }
 
 
-            if (树枝列表.Count != 物品多选.显示列表.Count)
+            if (itemTreeList.Count != 物品多选.显示列表.Count)
             {
-                树枝列表.Clear(); // List<ItemBool> 显示
+                itemTreeList.Clear(); // List<ItemBool> 显示
                 foreach (ItemBool  显示 in 物品多选.显示列表) 
                 {
                     NodeTree itemTree = new NodeTree();
                     itemTree.setRootItem(显示.itemProto, ref 物品配方索引);
                     itemTree.setRootResultValue(显示.itemProto, 显示.itemValue);
-                    树枝列表.Add(itemTree);
+                    itemTreeList.Add(itemTree);
                 }
-
-                树枝统计.set树枝列表(树枝列表);
+                物品统计.set树枝列表(itemTreeList);
+                配方统计.set树枝列表(itemTreeList);
             }
 
-            if (树枝列表.Count == 物品多选.显示列表.Count)
+            if (itemTreeList.Count == 物品多选.显示列表.Count)
             {
                 bool 有修改 = false;
-                for(int i=0; i < 树枝列表.Count; i++)
+                for(int i=0; i < itemTreeList.Count; i++)
                 {
                     ItemBool 显示 = 物品多选.显示列表[i];
-                    NodeTree itemTree = 树枝列表[i];
+                    NodeTree itemTree = itemTreeList[i];
                     if (itemTree.root.itemProto.ID != 显示.itemProto.ID)
                     {
                         itemTree.Clear();
@@ -110,7 +130,11 @@ namespace Qtool
                     
                 }
                 if (有修改)
-                    树枝统计.set树枝列表(树枝列表);
+                {
+                    物品统计.set树枝列表(itemTreeList);
+                    配方统计.set树枝列表(itemTreeList);
+                }
+
             }
 
         }
@@ -121,8 +145,9 @@ namespace Qtool
         {
             update物品配方索引();
             update物品多选();
-            update树枝统计();
-            update树枝列表();
+            update物品统计();
+            update配方统计();
+            updateItemTreeList();
 
             drawRecipeSelect();
             drawItemSelect();
@@ -286,6 +311,8 @@ namespace Qtool
             int i = 0;
             foreach (ItemBool itemSelect in 物品多选.显示列表)
             {
+                if (i >= 3)
+                    break;
                 GUI.Button(Plugin.实例.布局.newrectFrameLayer(row, col + i), itemSelect.itemProto.iconSprite.texture);
                 GUI.Label(Plugin.实例.布局.newrectFrameLayerName(row, col + i), itemSelect.itemProto.Name);
                 i++;
@@ -297,6 +324,8 @@ namespace Qtool
             int i = 0;
             foreach (ItemBool itemSelect in 物品多选.显示列表)
             {
+                if (i >= 3)
+                    break;
                 Rect rect1 = Plugin.实例.布局.newrectFrameLayer(row, col + i);
                 //Plugin.实例.布局.set字体比例(1);
                 string valueText = GUI.TextField(rect1, itemSelect.itemValue.ToString());
@@ -315,15 +344,18 @@ namespace Qtool
             int i = 0;
             foreach (ItemBool itemSelect in 物品多选.显示列表)
             {
+                if (i >= 3)
+                    break;
                 Rect rect1 = Plugin.实例.布局.newrectFrameLayer(row, col+i);
                 // Plugin.实例.布局.set字体比例(0.5f);
                 if (GUI.Button(rect1, "显示\n"+ itemSelect.itemProto.Name))
                 {
                     多选Index = i;
                     ItemBool 显示 = 物品多选.显示列表[i];
-                    NodeTree itemTree = 树枝列表[i];
+                    NodeTree itemTree = itemTreeList[i];
                     itemTree.setRootResultValue(显示.itemProto, 显示.itemValue);
-                    树枝统计.set树枝列表(树枝列表);
+                    物品统计.set树枝列表(itemTreeList);
+                    配方统计.set树枝列表(itemTreeList);
                 }
                 i++;
             }
@@ -338,8 +370,8 @@ namespace Qtool
             if (多选Index < 0)
                 return;
 
-            //Debug.Log("drawRecipeTree::" + 树枝列表.Count + "::" + 多选Index);
-            NodeTree itemTree = 树枝列表[多选Index];
+            //Debug.Log("drawRecipeTree::" + itemTreeList.Count + "::" + 多选Index);
+            NodeTree itemTree = itemTreeList[多选Index];
             if (itemTree == null)
                 return;
 

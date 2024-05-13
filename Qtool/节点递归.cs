@@ -241,8 +241,21 @@ namespace Qtool
                     node.itemColumns.Add(child.column);
                 }
             }
-
+           
         }
+
+        public NodeIteration getNodeFromItemID(int itemID)
+        {
+            foreach(NodeIteration node in allNodes)
+            {
+                if (node.itemProto.ID == itemID)
+                    return node;
+            }
+            return null;
+        }
+
+
+
 
 
     }

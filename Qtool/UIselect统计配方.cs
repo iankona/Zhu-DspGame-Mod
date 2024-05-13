@@ -5,102 +5,48 @@ using UnityEngine;
 
 namespace Qtool
 {
-    public class FrameItem统计
+    public class FrameSelect统计配方
     {
 
-        ItemInfoList item汇总 = null;
-        RecipeInfoList recipe汇总 = null;
+        配方统计处理 配方统计 = null;
 
-        void update汇总()
+        void update配方统计()
         {
-            if (Plugin.实例.item汇总 == null) // 延迟到游戏加载完成后，再初始化，防止调用游戏对象时出现null错误
+            if (Plugin.实例.配方统计 == null) // 延迟到游戏加载完成后，再初始化，防止调用游戏对象时出现null错误
                 return;
-
-            if (Plugin.实例.recipe汇总 == null) // 延迟到游戏加载完成后，再初始化，防止调用游戏对象时出现null错误
-                return;
-
-            item汇总 = Plugin.实例.item汇总;
-            recipe汇总 = Plugin.实例.recipe汇总;
+            配方统计 = Plugin.实例.配方统计;
         }
+
 
 
 
         public void showRecipe统计()
         {
-            update汇总();
-
-            drawItem汇总();
-            drawRecipe汇总();
+            update配方统计();
+            draw配方统计();
         }
 
-
-
-
-
-        void drawItem汇总()
+        void draw配方统计()
         {
-            if (item汇总 == null)
+            if (配方统计 == null)
                 return;
-
-            if(item汇总.显示产生列表 == null || item汇总.显示消耗列表 == null)
-                return;
-
-
-            drawItem汇总Box();
-
-            Rect rect1 = Plugin.实例.布局.newrectFrameLayer(0, 0);
-            Plugin.实例.布局.set字体比例(0.25f);
-            GUI.Box(rect1, "产生");
-
-            Rect rect2 = Plugin.实例.布局.newrectFrameLayer(0, 1);
-            Plugin.实例.布局.set字体比例(0.25f);
-            GUI.Box(rect2, "消耗");
-
-
-            int row = 1;
-            int col = 0;
-
-            foreach(ItemInfo 产生 in item汇总.显示产生列表) 
-            {
-                GUI.Box(Plugin.实例.布局.newrectFrameRecipeIconY(row + 产生.row, col), 产生.itemProto.iconSprite.texture);
-                GUI.Label(Plugin.实例.布局.newrectFrameRecipeNameY(row + 产生.row, col), 产生.value+"/min");
-            }
-
-            col = 1;
-            foreach (ItemInfo 消耗 in item汇总.显示消耗列表)
-            {
-                GUI.Box(Plugin.实例.布局.newrectFrameRecipeIconY(row + 消耗.row, col), 消耗.itemProto.iconSprite.texture);
-                GUI.Label(Plugin.实例.布局.newrectFrameRecipeNameY(row + 消耗.row, col), 消耗.value + "/min");
-            }
-
-
-
-        }
-
-        void drawItem汇总Box()
-        {
-            Rect startRect = Plugin.实例.布局.newrectFrameLayer(0, 0);
-            Rect finalRect = Plugin.实例.布局.newrectFrameLayer(item汇总.maxRow + 1, 1);
-            float width = finalRect.x - startRect.x + finalRect.width;
-            float height = finalRect.y - startRect.y + finalRect.height;
-            GUI.Box(new Rect(startRect.x, startRect.y, width, height), "");
-        }
-
-        void drawRecipe汇总()
-        {
-            if (recipe汇总 == null)
-                return;
-            if (recipe汇总.显示列表 == null)
+            if (配方统计.汇总 == null)
                 return;
 
             int row = 0;
             int col = 0 + 3;
-            drawRecipe汇总(row, col, recipe汇总);
+            drawRecipe统计(row, col, 配方统计.汇总);
+            col += (配方统计.汇总.maxResultsCount + 配方统计.汇总.maxItemsCount + 3);
 
+            foreach (RecipeInfoList recipe汇总 in 配方统计.recipe汇总列表)
+            {
+                drawRecipe统计(row, col, recipe汇总);
+                col += (recipe汇总.maxResultsCount + recipe汇总.maxItemsCount + 3);
+            }
 
         }
 
-        void drawRecipe汇总(int row, int col, RecipeInfoList recipe汇总)
+        void drawRecipe统计(int row, int col, RecipeInfoList recipe汇总)
         {
 
             foreach (RecipeInfo 记录 in recipe汇总.显示列表)
@@ -140,13 +86,6 @@ namespace Qtool
         {
 
             RecipeProto recipeProto = calc.recipeProto;
-
-            //if(recipeProto.Results.Length > 1)
-            //{
-            //    int column0 = col - recipeProto.Results.Length;
-            //    drawRecipeItemOrResultBox(row, column0, recipeProto.Results.Length);
-            //}
-            
             for (int k = 0; k < recipeProto.Results.Length; k++)
             {
                 int itemID1 = recipeProto.Results[k];
@@ -163,17 +102,10 @@ namespace Qtool
             }
 
             GUI.Box(Plugin.实例.布局.newrectFrameRecipeIcon(row, col), recipeProto.iconSprite.texture);
-            GUI.Label(Plugin.实例.布局.newrectFrameRecipeText上方(row, col), "配方："+recipeProto.ID);
+            GUI.Label(Plugin.实例.布局.newrectFrameRecipeText上方(row, col), "配方：" + recipeProto.ID);
             GUI.Label(Plugin.实例.布局.newrectFrameRecipeText中间(row, col), (recipeProto.TimeSpend / 60) + "S");
             GUI.Label(Plugin.实例.布局.newrectFrameRecipeText下方(row, col), calc.配方数量.ToString());
 
-
-
-            //if (recipeProto.Items.Length > 1)
-            //{
-            //    int column0 = col + 1;
-            //    drawRecipeItemOrResultBox(row, column0, recipeProto.Results.Length);
-            //}
 
             for (int m = 0; m < recipeProto.Items.Length; m++)
             {
@@ -193,19 +125,7 @@ namespace Qtool
         }
 
 
-        void drawRecipeItemOrResultBox(int row, int col, int length)
-        {
-            if (length <= 1)
-            { return; }
 
-            Rect startRect = Plugin.实例.布局.newrectFrameRecipeIcon(row, col);
-            Rect finalRect = Plugin.实例.布局.newrectFrameRecipeIcon(row, col + length - 1);
-
-            float width = finalRect.x - startRect.x + finalRect.width;
-            float height = finalRect.y - startRect.y + finalRect.height;
-            GUI.Box(new Rect(startRect.x, startRect.y, width, height), "");
-
-        }
 
     }
 }

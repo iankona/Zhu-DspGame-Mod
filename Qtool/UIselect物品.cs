@@ -25,7 +25,7 @@ namespace Qtool
         public List<ItemBool> 记录列表 = new List<ItemBool>(4); // 此时LDB还是null
         public List<ItemBool> 显示列表 = new List<ItemBool>(4); // 此时LDB还是null
 
-        public void 初始化() 
+        public void 初始化()
         {
             记录列表.Clear();
             foreach (ItemProto itemProto in LDB.items.dataArray)
@@ -40,16 +40,53 @@ namespace Qtool
             }
         }
 
+        public void setItemProtos(List<ItemProto> dataArray)
+        {
+            记录列表.Clear();
+            foreach (ItemProto itemProto1 in dataArray)
+            {
+                ItemBool itemBool = new ItemBool();
+                itemBool.是否选上 = false;
+                itemBool.itemProto = itemProto1;
+                itemBool.itemValue = 60;
+                记录列表.Add(itemBool);
+            }
+        }
+
+        public void set全选()
+        {
+            foreach(ItemBool itemBool in 记录列表)
+            {
+                itemBool.是否选上 = true;
+            }
+            //foreach (ItemBool itemBool in 记录列表)
+            //{
+            //    Debug.Log(itemBool.是否选上);
+            //}
+        }
+
+        public void set反选()
+        {
+            foreach (ItemBool itemBool in 记录列表)
+            {
+                itemBool.是否选上 = !itemBool.是否选上;
+            }
+        }
+        public void set全不选()
+        {
+            foreach (ItemBool itemBool in 记录列表)
+            {
+                itemBool.是否选上 = false;
+            }
+        }
+
         public void 更新显示列表()
         {
             显示列表.Clear();
-            int i = 0;
             foreach (ItemBool 记录 in 记录列表)
             {
                 if (!记录.是否选上)
                     continue;
-                if (i + 1 > 3) // 
-                    break;
                 显示列表.Add(记录);
             }
         }
