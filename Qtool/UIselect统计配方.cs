@@ -23,8 +23,49 @@ namespace Qtool
         public void showRecipe统计()
         {
             update配方统计();
+            drawRecipeTitle();
             draw配方统计();
         }
+
+
+        void drawRecipeTitle()
+        {
+            if (配方统计 == null)
+                return;
+            if (配方统计.汇总 == null)
+                return;
+
+            int row = 0;
+            int col = 0;
+
+            drawRecipeTitleBox(row, col, 配方统计.汇总.maxResultsCount + 配方统计.汇总.maxItemsCount + 3);
+
+            Rect rect1 = Plugin.实例.布局.newrectFrameRecipeIcon(row, col);
+            Plugin.实例.布局.set字体比例(0.25f);
+            GUI.Box(rect1, "汇总");
+
+            col += (配方统计.汇总.maxResultsCount + 配方统计.汇总.maxItemsCount + 3);
+            foreach (RecipeInfoList recipe汇总 in 配方统计.recipe汇总列表)
+            {
+                int length = recipe汇总.maxResultsCount + recipe汇总.maxItemsCount + 3;
+                drawRecipeTitleBox(row, col, length);
+                GUI.Box(Plugin.实例.布局.newrectFrameRecipeIcon(row, col), recipe汇总.itemTree.root.itemProto.iconSprite.texture);
+                GUI.Label(Plugin.实例.布局.newrectFrameRecipeName(row, col), recipe汇总.itemTree.root.itemProto.Name);
+                col += length;
+            }
+
+        }
+
+        void drawRecipeTitleBox(int row, int col, int length)
+        {
+            Rect startRect = Plugin.实例.布局.newrectFrameRecipeIcon(row, col);
+            Rect finalRect = Plugin.实例.布局.newrectFrameRecipeIcon(row, col+length-1);
+
+            float width = finalRect.x - startRect.x + finalRect.width;
+            float height = finalRect.y - startRect.y + finalRect.height;
+            GUI.Box(new Rect(startRect.x, startRect.y, width, height), "");
+        }
+
 
         void draw配方统计()
         {
@@ -33,8 +74,8 @@ namespace Qtool
             if (配方统计.汇总 == null)
                 return;
 
-            int row = 0;
-            int col = 0 + 3;
+            int row = 1;
+            int col = 0;
             drawRecipe统计(row, col, 配方统计.汇总);
             col += (配方统计.汇总.maxResultsCount + 配方统计.汇总.maxItemsCount + 3);
 

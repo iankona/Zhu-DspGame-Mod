@@ -32,9 +32,13 @@ namespace Qtool
 
         public FrameSprite 图标界面 = new FrameSprite();
         public FrameTexture 贴图界面 = new FrameTexture();
-        //public FrameTexture 贴图界面 = new FrameTexture();
-        //public FrameTest 测试界面 = new FrameTest();
         //public FrameLine 直线界面 = new FrameLine();
+        public FrameLineTexture 直线贴图界面 = new FrameLineTexture();
+        public FrameLineWhite 直线白色界面 = new FrameLineWhite();
+        public FrameLineColor 直线颜色界面 = new FrameLineColor();
+
+        //public FrameTest 测试界面 = new FrameTest();
+
         public void showWindown()
         {
 
@@ -134,19 +138,32 @@ namespace Qtool
                     break;
 
 
-                    //case 11:
-                    //    图标界面.showSprites();
-                    //    break;
+                case 31:
+                    图标界面.showSprites();
+                    break;
+
+                case 32:
+                    贴图界面.showTextures();
+                    break;
+
+
+                case 34:
+                    //直线贴图界面.showLines();
+                    直线贴图界面.showLineTextures();
+                    break;
+
+                case 35:
+                    直线白色界面.showLines();
+                    break;
+                case 36:
+                    直线颜色界面.showLines();
+                    break;
 
                     //case 12:
                     //    测试界面.showTests();
                     //    break;
                     //case 13:
                     //    直线界面.showLines();
-                    //    break;
-
-                    //case 14:
-                    //    贴图界面.showTextures();
                     //    break;
 
 

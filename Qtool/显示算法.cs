@@ -1,5 +1,6 @@
 ﻿
 
+using Steamworks;
 using System.Collections.Generic;
 using System.Security.Policy;
 using UnityEngine;
@@ -452,6 +453,36 @@ namespace Qtool
             return new Rect(x, y, side, side / 3);
 
         }
+
+        public Rect newRectInfoIcon(int sumx, int sumy, int width, int height)
+        {
+            get鼠标更新();
+
+            float left = frame_padx + offset_x;
+            float topb = frame_pady + height1 + height2 + offset_y;
+
+            float x = left + sumx + padx * 5;
+            float y = topb + sumy + pady;
+            return new Rect(x, y, width, height);
+        }
+
+        public Rect newRectInfoName(int sumx, int sumy, int width, int height)
+        {
+            get鼠标更新();
+            float left = frame_padx + offset_x;
+            float topb = frame_pady + height1 + height2 + offset_y;
+
+            float x = left + sumx + padx * 5;
+            float y = topb + sumy + pady;
+            return new Rect(x, y, width, side / 3);
+
+        }
+
+
+
+
+
+
     }
 
 
@@ -462,9 +493,327 @@ namespace Qtool
 
 
 
+    public class RectInfo
+    {
+        public int row;
+        public int col;
+
+        public Texture texture;
+
+        public int x;
+        public int y;
+        public int width;
+        public int height;
+
+        public int sumx;
+        public int sumy;
+        public int maxwidth;
+        public int maxheight;
+
+        public Rect newRect()
+        {
+            return new Rect(x, y, width, height);
+        }
+
+    }
+
+    public class RectInfoList
+    {
+        public List<RectInfo> iconRectList = new List<RectInfo>(2048);
+        List<int> 列宽列表 = new List<int>(1024);
+        List<int> 行高列表 = new List<int>(1024);
+        List<int> 累加列宽列表 = new List<int>(1024);
+        List<int> 累加行高列表 = new List<int>(1024);
+
+        int 行数 = 0;
+        int 列数 = 0;
+
+        public void Clear() 
+        {
+            iconRectList.Clear();
+            列宽列表.Clear();
+            行高列表.Clear();
+            累加列宽列表.Clear();
+            累加行高列表.Clear();
+        }
+
+        public void addTexture(int row1, int col1, Texture texture)
+        {
+            RectInfo rectInfo1 = new RectInfo();
+            rectInfo1.row = row1;
+            rectInfo1.col = col1;
+            rectInfo1.texture = texture;
+            rectInfo1.width = texture.width;
+            rectInfo1.height = texture.height;
+
+            bool 在列表里 = inTextureList(rectInfo1);
+            if (在列表里)
+            {
+                Debug.Log("已有对象在列表里，对象对象::" + rectInfo1.row + "::" + rectInfo1.col + "::" + rectInfo1.width + "::" + rectInfo1.height + "未加入列表");
+                return;
+            }
+            iconRectList.Add(rectInfo1);
+            // Debug.Log(row1+"::" + col1 +"::"+ texture.name + "::" + texture.width + "::" + texture.height);
+        }
+
+        public RectInfo getRectInfo(int row1, int col1)
+        {
+
+            foreach (RectInfo rectInfo2 in iconRectList)
+            {
+                if (row1 == rectInfo2.row && col1 == rectInfo2.col)
+                {
+                    return rectInfo2;
+                }
+            }
+            return null;
+        }
 
 
 
+
+        bool inTextureList(RectInfo rectInfo1)
+        {
+            bool 在列表里 = false;
+            foreach (RectInfo rectInfo2 in iconRectList) 
+            { if(rectInfo1.row == rectInfo2.row && rectInfo1.col == rectInfo2.col)
+                {
+                    在列表里 = true; 
+                    break;
+                }
+            }
+            return 在列表里;
+        }
+
+        List<RectInfo> getRowList(int row)
+        {
+            List<RectInfo> result = new List<RectInfo>(256);
+            foreach (RectInfo rectInfo1 in iconRectList)
+            {
+                if(rectInfo1.row == row)
+                    result.Add(rectInfo1);
+            }
+            if (result.Count > 0)
+                return result;
+            return null;
+        }
+
+        List<RectInfo> getColList(int col)
+        {
+            List<RectInfo> result = new List<RectInfo>(256);
+            foreach (RectInfo rectInfo1 in iconRectList)
+            {
+                if (rectInfo1.col == col)
+                    result.Add(rectInfo1);
+            }
+            if (result.Count > 0)
+                return result;
+            return null;
+        }
+
+        void update行数()
+        {
+            行数 = 0;
+            foreach (RectInfo rectInfo1 in iconRectList)
+            {
+                int count = rectInfo1.row + 1;
+                if (count > 行数)
+                    行数 = count;
+            }
+        }
+
+        void update列数()
+        {
+            列数 = 0;
+            foreach (RectInfo rectInfo1 in iconRectList)
+            {
+                int count = rectInfo1.col + 1;
+                if (count > 列数)
+                    列数 = count;
+            }
+        }
+
+        void update行高列表()
+        {
+            行高列表.Clear();
+            for (int i = 0; i < 行数; i++)
+            {
+                List<RectInfo> rowRectInfoList = getRowList(i);
+                if (rowRectInfoList == null) 
+                {
+                    行高列表.Add(0);
+                    continue;
+                }
+                int maxHeight = 0;
+                foreach(RectInfo rectInfo2 in rowRectInfoList) 
+                { 
+                    if (rectInfo2.height > maxHeight)
+                        maxHeight = rectInfo2.height; 
+                }
+
+                行高列表.Add(maxHeight);
+
+                foreach (RectInfo rectInfo2 in rowRectInfoList)
+                    rectInfo2.maxheight = maxHeight;
+
+            }
+        }
+
+
+
+        void update列宽列表()
+        {
+            列宽列表.Clear();
+            for (int i = 0; i < 列数; i++)
+            {
+                List<RectInfo> colRectInfoList = getColList(i);
+                if (colRectInfoList == null)
+                {
+                    列宽列表.Add(0);
+                    continue;
+                } 
+                int maxWidth = 0;
+                foreach (RectInfo rectInfo2 in colRectInfoList)
+                {
+                    if (rectInfo2.width > maxWidth)
+                        maxWidth = rectInfo2.width;
+                }
+
+                列宽列表.Add(maxWidth);
+
+                foreach (RectInfo rectInfo2 in colRectInfoList)
+                    rectInfo2.maxwidth = maxWidth;
+            }
+        }
+
+
+
+        void update累加行高列表外部()
+        {
+            累加行高列表.Clear();
+            累加行高列表.Add(0);
+            int sumY = 0;
+            for (int i = 1; i < 行数; i++)
+            {
+                int maxHeight = 行高列表[i - 1];
+                sumY += maxHeight;
+                累加行高列表.Add(sumY);
+            }
+
+            foreach (RectInfo rectInfo1 in iconRectList)
+                rectInfo1.sumy = 累加行高列表[rectInfo1.row];
+
+        }
+
+
+
+        void update累加列宽列表外部()
+        {
+            累加列宽列表.Clear();
+            累加列宽列表.Add(0);
+            int sumX = 0;
+            for (int i = 1; i < 列数; i++)
+            {
+                int maxWidth = 列宽列表[i - 1];
+                sumX += maxWidth;
+                累加列宽列表.Add(sumX);
+            }
+            foreach (RectInfo rectInfo1 in iconRectList)
+                rectInfo1.sumx = 累加列宽列表[rectInfo1.col];
+        }
+
+
+
+
+
+
+
+
+        void update累加列宽列表内部()
+        {
+            for (int i = 0; i < 列数; i++)
+            {
+                List<RectInfo> colRectInfoList = getColList(i);
+                if (colRectInfoList == null)
+                    continue;
+                int sumX = 0;
+                foreach (RectInfo rectInfo2 in colRectInfoList)
+                {
+                    rectInfo2.sumx = sumX;
+                    sumX += rectInfo2.width;
+                }
+
+            }
+        }
+
+        void update累加行高列表内部()
+        {
+            for (int i = 0; i < 行数; i++)
+            {
+                List<RectInfo> rowRectInfoList = getRowList(i);
+                if (rowRectInfoList == null)
+                    continue;
+                int sumY = 0;
+                foreach (RectInfo rectInfo2 in rowRectInfoList)
+                {
+                    rectInfo2.sumy = sumY;
+                    sumY += rectInfo2.height;
+                }
+
+            }
+        }
+
+        void SumXYtoXY()
+        {
+            foreach (RectInfo rectInfo2 in iconRectList)
+            {
+                rectInfo2.x = rectInfo2.sumx;
+                rectInfo2.y = rectInfo2.sumy;
+            }
+
+        }
+
+
+
+        public void 网格分布()
+        {
+            update列数();
+            update列宽列表();
+            update累加列宽列表外部();
+
+            update行数();
+            update行高列表();
+            update累加行高列表外部();
+
+            SumXYtoXY();
+        }
+
+        public void 列靠分布()
+        {
+            update列数();
+            update列宽列表();
+            update累加列宽列表内部();
+
+            update行数();
+            update行高列表();
+            update累加行高列表外部();
+
+            SumXYtoXY();
+        }
+
+        public void 行靠分布()
+        {
+            update列数();
+            update列宽列表();
+            update累加列宽列表外部();
+
+            update行数();
+            update行高列表();
+            update累加行高列表内部();
+
+            SumXYtoXY();
+        }
+    }
 
 
 

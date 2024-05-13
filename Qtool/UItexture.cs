@@ -21,17 +21,68 @@ namespace Qtool
 {
     public class FrameTexture
     {
+        RectInfoList 贴图布局 = null;
+        int 列数 = 5;
+
 
 
         public void showTextures()
         {
+            //updateTextures();
+            //drawTextures();
+
             Texture[] 列表 = (Texture[])UnityEngine.Resources.FindObjectsOfTypeAll(typeof(Texture));
 
             int i = 0;
-            foreach (Texture t in 列表)
+            foreach (Texture texture in 列表)
             {
-                GUI.DrawTexture(Plugin.实例.布局.newrectFrameLayerY(i), t);
-                GUI.Box(Plugin.实例.布局.newrectFrameLayerY(i), i.ToString());
+                GUI.DrawTexture(Plugin.实例.布局.newrectFrameLayerY(i), texture);
+                GUI.Box(Plugin.实例.布局.newrectFrameLayerY(i), i+ texture.name);
+                i++;
+            }
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+        void updateTextures()
+        {
+            if (贴图布局 == null)
+            {
+                贴图布局 = new RectInfoList();
+                Texture[] 贴图列表 = (Texture[])UnityEngine.Resources.FindObjectsOfTypeAll(typeof(Texture));
+                int i = 0;
+                foreach (Texture texture in 贴图列表)
+                {
+                    //int row = i / 列数;
+                    //int col = i % 列数;
+                    贴图布局.addTexture(i, 0, texture);
+                    i++;
+                }
+                贴图布局.网格分布();
+            }
+        }
+
+
+        public void drawTextures()
+        {
+
+            int i = 0;
+            foreach (RectInfo rectInfo in 贴图布局.iconRectList)
+            {
+                //GUI.DrawTexture(rectInfo.newRect(), rectInfo.texture);
+                //GUI.Label(rectInfo.newRect(), i + "::" + rectInfo.texture.name);
+                GUI.DrawTexture(Plugin.实例.布局.newRectInfoIcon(rectInfo.x, rectInfo.y, rectInfo.width, rectInfo.height), rectInfo.texture);
+                GUI.Label(Plugin.实例.布局.newRectInfoName(rectInfo.x, rectInfo.y, rectInfo.width, rectInfo.height), i+"::"+ rectInfo.texture.name);
                 i++;
             }
 

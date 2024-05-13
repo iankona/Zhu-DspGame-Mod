@@ -318,6 +318,7 @@ namespace Qtool
 
     public class RecipeInfoList
     {
+        public NodeTree itemTree = null;
         public List<RecipeInfo> 记录列表 = null;
         public List<RecipeInfo> 显示列表 = null;
         public int maxResultsCount = 0;
@@ -368,10 +369,11 @@ namespace Qtool
         }
 
 
-        public void set树枝(NodeTree itemTree) 
+        public void set树枝(NodeTree itemTree2) 
         {
+            itemTree = itemTree2;
             new记录列表();
-            setRecipeDataArrayTree(itemTree);
+            setRecipeDataArrayTree(itemTree2);
             sumRecipeDataArray();
 
         }

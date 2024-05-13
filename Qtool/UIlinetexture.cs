@@ -19,30 +19,82 @@ using UnityEngine.UI;
 
 namespace Qtool
 {
-    //public class FrameTexture
-    //{
+    public class FrameLineTexture
+    {
 
+        RectInfoList 贴图布局 = null;
+        int 列数 = 5;
 
-    //    public void showTextures()
-    //    {
-    //        Texture[] 列表 = (Texture[])UnityEngine.Resources.FindObjectsOfTypeAll(typeof(Texture));
+        public void showLines()
+        {
 
-    //        int i = 0;
-    //        foreach (Texture t in 列表)
-    //        {
-    //            GUI.DrawTexture(Plugin.实例.布局.newrectFrameLayerY(i), t);
-    //            GUI.Box(Plugin.实例.布局.newrectFrameLayerY(i), i.ToString());
-    //            i++;
-    //        }
-
-
-
-
-    //    }
+            for (int i = 1; i < 43 ; i++)
+            {
+                Sprite sprite = UnityEngine.Resources.Load<Sprite>("UI/Textures/Sprites/Milestone/lines/" + i);
+                GUI.DrawTexture(Plugin.实例.布局.newrectFrameLayerY(i), sprite.texture);
+                GUI.Box(Plugin.实例.布局.newrectFrameLayerY(i), i+ sprite.texture.name);
+                i++;
+            }
 
 
 
-    //}
+
+        }
+
+
+
+
+
+        public void showLineTextures()
+        {
+            updateTextures();
+            drawTextures();
+
+        }
+
+
+        void updateTextures()
+        {
+            if (贴图布局 == null)
+            {
+                贴图布局 = new RectInfoList();
+
+                for (int i = 1; i < 43; i++)
+                {
+                    int row = i / 列数;
+                    int col = i % 列数;
+                    Sprite sprite = UnityEngine.Resources.Load<Sprite>("UI/Textures/Sprites/Milestone/lines/" + i);
+                    贴图布局.addTexture(row, col, sprite.texture);
+
+                }
+
+                贴图布局.网格分布();
+            }
+        }
+
+
+        public void drawTextures()
+        {
+
+            int i = 0;
+            foreach (RectInfo rectInfo in 贴图布局.iconRectList)
+            {
+                GUI.DrawTexture(Plugin.实例.布局.newRectInfoIcon(rectInfo.x, rectInfo.y, rectInfo.width, rectInfo.height), rectInfo.texture);
+                GUI.Box(Plugin.实例.布局.newRectInfoIcon(rectInfo.x, rectInfo.y, rectInfo.width, rectInfo.height), i + "::" + rectInfo.texture.name);
+                i++;
+            }
+
+
+
+
+        }
+
+
+
+
+
+
+    }
 
 
 
