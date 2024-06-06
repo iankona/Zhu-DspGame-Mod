@@ -324,7 +324,10 @@ namespace Qtool
             if (GUI.Button(rect1, "更新\n" + itemProto.Name))
             {
                 itemTree.setRootResultValue(itemProto, itemValue);
+                item汇总.set树枝(itemTree);
+                item汇总.updateForShow();
                 recipe汇总.set树枝(itemTree);
+                recipe汇总.updateForShow();
             }
 
         }
