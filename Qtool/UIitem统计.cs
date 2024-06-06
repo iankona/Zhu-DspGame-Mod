@@ -30,6 +30,7 @@ namespace Qtool
             update汇总();
 
             drawItem汇总();
+            draw数量汇总();
             drawRecipe汇总();
         }
 
@@ -77,6 +78,8 @@ namespace Qtool
 
         }
 
+
+
         void drawItem汇总Box()
         {
             Rect startRect = Plugin.实例.布局.newrectFrameLayer(0, 0);
@@ -85,6 +88,57 @@ namespace Qtool
             float height = finalRect.y - startRect.y + finalRect.height;
             GUI.Box(new Rect(startRect.x, startRect.y, width, height), "");
         }
+
+
+
+
+        void draw数量汇总()
+        {
+            if (item汇总 == null)
+                return;
+
+            if (item汇总.显示产生列表 == null || item汇总.显示消耗列表 == null)
+                return;
+
+
+            draw数量汇总Box();
+
+            Rect rect1 = Plugin.实例.布局.newrectFrameLayer(0, 2);
+            Plugin.实例.布局.set字体比例(0.25f);
+            GUI.Box(rect1, "配方");
+
+
+            int row = 1;
+            int col = 2;
+
+            int i = 0;
+            foreach (RecipeInfo 记录 in recipe汇总.显示列表)
+            {
+                GUI.Box(Plugin.实例.布局.newrectFrameRecipeIconY(row + i, col), 记录.calcSum.recipeProto.iconSprite.texture);
+                GUI.Label(Plugin.实例.布局.newrectFrameRecipeText上方Y(row + i, col), "配方：" + 记录.calcSum.recipeProto.Name);
+                GUI.Label(Plugin.实例.布局.newrectFrameRecipeNameY(row + i, col), "数量：" + 记录.calcSum.配方数量);
+                i++;
+            }
+
+
+        }
+
+
+
+
+        void draw数量汇总Box()
+        {
+            int row = 0;
+            int col = 2;
+            Rect startRect = Plugin.实例.布局.newrectFrameLayer(row, col);
+            Rect finalRect = Plugin.实例.布局.newrectFrameLayer(row+recipe汇总.显示列表.Count + 1, col);
+            float width = finalRect.x - startRect.x + finalRect.width;
+            float height = finalRect.y - startRect.y + finalRect.height;
+            GUI.Box(new Rect(startRect.x, startRect.y, width, height), "");
+        }
+
+
+
 
         void drawRecipe汇总()
         {
@@ -165,7 +219,7 @@ namespace Qtool
             GUI.Box(Plugin.实例.布局.newrectFrameRecipeIcon(row, col), recipeProto.iconSprite.texture);
             GUI.Label(Plugin.实例.布局.newrectFrameRecipeText上方(row, col), "配方："+recipeProto.ID);
             GUI.Label(Plugin.实例.布局.newrectFrameRecipeText中间(row, col), (recipeProto.TimeSpend / 60) + "S");
-            GUI.Label(Plugin.实例.布局.newrectFrameRecipeText下方(row, col), calc.配方数量.ToString());
+            GUI.Label(Plugin.实例.布局.newrectFrameRecipeText下方(row, col), "数量："+calc.配方数量);
 
 
 

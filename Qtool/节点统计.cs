@@ -83,6 +83,15 @@ namespace Qtool
                 calcSum.ItemValues.Add(tempItemValue);
             }
 
+            calcSum.配方数量 = 0.0f;
+            foreach (NodeCalculate calc in dataArray)
+            {
+                if (calc == null)
+                { continue; }
+                calcSum.配方数量 += calc.配方数量;
+            }
+
+
             calcSum.resultValue = 0.0f;
             foreach (NodeCalculate calc in dataArray)
             {

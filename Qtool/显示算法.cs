@@ -411,7 +411,44 @@ namespace Qtool
         }
 
 
+        public Rect newrectFrameRecipeText上方Y(int row, int col)
+        {
+            get鼠标更新();
+            row += 1;
+            float left = frame_padx;
+            float topb = frame_pady + height1 + height2 + offset_y;
 
+            float x = left + col * (side + padx);
+            float y = topb + row * (side + pady) - side;
+            return new Rect(x, y, side, side / 3);
+
+        }
+
+        public Rect newrectFrameRecipeText中间Y(int row, int col)
+        {
+            get鼠标更新();
+            row += 1;
+            float left = frame_padx;
+            float topb = frame_pady + height1 + height2 + offset_y;
+
+            float x = left + col * (side + padx);
+            float y = topb + row * (side + pady) - side / 3 * 2;
+            return new Rect(x, y, side, side / 3);
+
+        }
+
+        public Rect newrectFrameRecipeText下方Y(int row, int col)
+        {
+            get鼠标更新();
+            row += 1;
+            float left = frame_padx;
+            float topb = frame_pady + height1 + height2 + offset_y;
+
+            float x = left + col * (side + padx);
+            float y = topb + row * (side + pady) - side / 3;
+            return new Rect(x, y, side, side / 3);
+
+        }
 
 
 
