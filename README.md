@@ -11,7 +11,7 @@
 
 - ZhuQtool.dll
 
-  ​	修改于[xxoolm‘s QTools](https://github.com/xxoolm/QTools)项目，实验功能，简单的内置量化，按~键(ESC下方)打开界面，不支持更换高等级制造设备和增产剂计算。
+  ​	修改于[xxoolm‘s QTools](https://github.com/xxoolm/QTools)项目，实验功能，简单的内置量化，按~键(ESC下方)打开界面，可以正向计算和统计生产黄糖需要多少原材料，也可以查看铁块可以生产哪些物品，反向计算，则需要选定目标产物才会计算及更新显示。不支持更换高等级制造设备和增产剂计算。
 
 
 
