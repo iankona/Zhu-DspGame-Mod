@@ -49,8 +49,8 @@ namespace Qtool
 
         void drawWindowFunction(int windowID)
         {
-            //drawFrameRivet();
-            //drawFrameLayer();
+            drawFrameRivet();
+            drawFrameLayer();
             // GUI.DragWindow();
 
         }
@@ -75,9 +75,9 @@ namespace Qtool
             if (GUILayout.Button("Select量化")) { guilayerindex = 22; }
             if (GUILayout.Button("Select统计")) { guilayerindex = 23; }
             if (GUILayout.Button("Select统计")) { guilayerindex = 24; }
-            //if (GUILayout.Button("Select反向")) { guilayerindex = 25; }
-            //if (GUILayout.Button("Select反算")) { guilayerindex = 25; }
-            //if (GUILayout.Button("Select配方")) { guilayerindex = 26; }
+            if (GUILayout.Button("Select反向")) { guilayerindex = 25; }
+            if (GUILayout.Button("Select反算")) { guilayerindex = 25; }
+            if (GUILayout.Button("Select配方")) { guilayerindex = 26; }
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
@@ -159,14 +159,12 @@ namespace Qtool
                     直线颜色界面.showLines();
                     break;
 
-                    //case 12:
-                    //    测试界面.showTests();
-                    //    break;
-                    //case 13:
-                    //    直线界面.showLines();
-                    //    break;
-
-
+                //case 12:
+                //    测试界面.showTests();
+                //    break;
+                //case 13:
+                //    直线界面.showLines();
+                //    break;
 
 
             }
