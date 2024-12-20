@@ -1,0 +1,7 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <Compile Include="../src/黑雾不登录初始星系.cs" />
+  </ItemGroup>
+
+</Project>

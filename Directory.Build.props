@@ -1,0 +1,26 @@
+
+<Project>
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <BaseOutputPath>..\bin</BaseOutputPath>
+    <BaseIntermediateOutputPath>..\obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
+    <AssemblyName>Zhu$(MSBuildProjectName)</AssemblyName>
+    <MSBUildProjectExtensionsPath>..\obj\$(MSBuildProjectName)</MSBUildProjectExtensionsPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NETStandard.Library" Version="2.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>D:\Program_disport\StreamApps\common\Dyson Sphere Program\BepInEx\core\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="BepInEx">
+      <HintPath>D:\Program_disport\StreamApps\common\Dyson Sphere Program\BepInEx\core\BepInEx.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,7 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <Compile Include="../src/取物范围.cs" />
+  </ItemGroup>
+
+</Project>

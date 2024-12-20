@@ -1,0 +1,7 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <Compile Include="../src/小矿机采集整个矿簇.cs" />
+  </ItemGroup>
+
+</Project>

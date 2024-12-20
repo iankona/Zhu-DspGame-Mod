@@ -1,0 +1,7 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <Compile Include="../src/物流配送机起送量.cs" />
+  </ItemGroup>
+
+</Project>

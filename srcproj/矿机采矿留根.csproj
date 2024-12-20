@@ -1,0 +1,7 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <Compile Include="../src/矿机采矿留根.cs" />
+  </ItemGroup>
+
+</Project>

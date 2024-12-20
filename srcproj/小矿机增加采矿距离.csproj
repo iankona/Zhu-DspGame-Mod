@@ -1,0 +1,7 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <Compile Include="../src/小矿机增加采矿距离.cs" />
+  </ItemGroup>
+
+</Project>

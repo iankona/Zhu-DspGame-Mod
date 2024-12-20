@@ -1,0 +1,7 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <Compile Include="../src/轨道采集器立即建造.cs" />
+  </ItemGroup>
+
+</Project>
